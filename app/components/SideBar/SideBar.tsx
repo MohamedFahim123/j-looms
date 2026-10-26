@@ -1,5 +1,4 @@
 "use client";
-<<<<<<< HEAD
 import { useActionsAndActivityStore } from "@/app/store/getActivitiesAndActions";
 import { useClassesStore } from "@/app/store/getAllClasses";
 import { useCountriesStore } from "@/app/store/getAllCountries";
@@ -23,27 +22,6 @@ import { RiParentFill } from "react-icons/ri";
 import { SiGoogleclassroom } from "react-icons/si";
 import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import styles from "./sideBar.module.css";
-=======
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import {
-  FaUser,
-  FaChalkboardTeacher,
-  FaCog,
-  FaSignOutAlt,
-  FaArrowAltCircleLeft,
-  FaArrowAltCircleRight,
-  FaBell,
-} from "react-icons/fa";
-import { useRouter, usePathname } from "next/navigation";
-import { useEffect } from "react";
-import styles from "./sideBar.module.css";
-import { PiStudentBold } from "react-icons/pi";
-import { BsCalendar2EventFill } from "react-icons/bs";
-import { MdSubject } from "react-icons/md";
-import { SiGoogleclassroom } from "react-icons/si";
-import { useClassesStore } from "@/app/store/getAllClasses";
-import { RiParentFill } from "react-icons/ri";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 interface SideBarProps {
   collapsed: boolean;
@@ -53,7 +31,6 @@ interface SideBarProps {
 export default function SideBar({ collapsed, setCollapsed }: SideBarProps) {
   const router = useRouter();
   const pathname = usePathname();
-<<<<<<< HEAD
   const { classes, getClasses, classesLoading } = useClassesStore();
   const { rules, getRules, rulesLoading } = useRulesStore();
   const { user, getUser, userLoading } = useUserStore();
@@ -102,13 +79,6 @@ export default function SideBar({ collapsed, setCollapsed }: SideBarProps) {
     getUserProfile();
     getAllCountries();
   }, [getAllClasses, getAllCountries, getAllRules, getUserProfile]);
-=======
-  const { getClasses } = useClassesStore();
-
-  useEffect(() => {
-    getClasses();
-  }, [pathname, getClasses]);
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
   const isActive = (path: string) => pathname.includes(path);
 
@@ -149,7 +119,6 @@ export default function SideBar({ collapsed, setCollapsed }: SideBarProps) {
         )}
       </div>
       <Menu>
-<<<<<<< HEAD
         {userLoginnedType === "Admin" ? (
           <MenuItem
             icon={<FaUser />}
@@ -349,108 +318,6 @@ export default function SideBar({ collapsed, setCollapsed }: SideBarProps) {
 
         <SubMenu label="Settings" icon={<FaCog />}>
           <MenuItem
-=======
-        <MenuItem
-          icon={<FaUser />}
-          onClick={() => router.push("/dashboard/profile")}
-          className={
-            isActive("/dashboard/profile") ? `${styles.activeMenuItem}` : ""
-          }
-        >
-          Profile
-        </MenuItem>
-
-        <MenuItem
-          icon={<FaChalkboardTeacher />}
-          onClick={() => router.push("/dashboard/teachers")}
-          className={
-            isActive("/dashboard/teachers") ? `${styles.activeMenuItem}` : ""
-          }
-        >
-          Teachers
-        </MenuItem>
-
-        <MenuItem
-          icon={<PiStudentBold />}
-          onClick={() => router.push("/dashboard/students")}
-          className={
-            isActive("/dashboard/students") ? `${styles.activeMenuItem}` : ""
-          }
-        >
-          Students
-        </MenuItem>
-
-        <MenuItem
-          icon={<RiParentFill />}
-          onClick={() => router.push("/dashboard/parents")}
-          className={
-            isActive("/dashboard/parents") ? `${styles.activeMenuItem}` : ""
-          }
-        >
-          Parents
-        </MenuItem>
-
-        <MenuItem
-          icon={<SiGoogleclassroom />}
-          onClick={() => router.push("/dashboard/classes")}
-          className={
-            isActive("/dashboard/classes") ? `${styles.activeMenuItem}` : ""
-          }
-        >
-          Classes
-        </MenuItem>
-
-        <MenuItem
-          icon={<MdSubject />}
-          onClick={() => router.push("/dashboard/subjects")}
-          className={
-            isActive("/dashboard/subjects") ? `${styles.activeMenuItem}` : ""
-          }
-        >
-          Subjects
-        </MenuItem>
-
-        <MenuItem
-          icon={<BsCalendar2EventFill />}
-          onClick={() => router.push("/dashboard/events")}
-          className={
-            isActive("/dashboard/events") ? `${styles.activeMenuItem}` : ""
-          }
-        >
-          Events
-        </MenuItem>
-
-        <MenuItem
-          icon={<FaBell />}
-          onClick={() => router.push("/dashboard/notifications")}
-          className={
-            isActive("/dashboard/notifications")
-              ? `${styles.activeMenuItem}`
-              : ""
-          }
-        >
-          Notifications
-        </MenuItem>
-
-        <MenuItem
-          icon={<FaSignOutAlt />}
-          onClick={() => router.push("/dashboard/requests")}
-          className={
-            isActive("/dashboard/requests") ? `${styles.activeMenuItem}` : ""
-          }
-        >
-          Requests
-        </MenuItem>
-
-        <SubMenu
-          className={
-            isActive("/dashboard/settings") ? `${styles.activeMenuItem}` : ""
-          }
-          label="Settings"
-          icon={<FaCog />}
-        >
-          <MenuItem
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
             onClick={() => router.push("/dashboard/settings/school-details")}
             className={
               isActive("/dashboard/settings/school-details")

@@ -6,24 +6,12 @@ import Link from "next/link";
 import { FaEnvelope, FaGraduationCap, FaPhoneAlt } from "react-icons/fa";
 import Avatar from "../../../imgs/teachers/teacher1.png";
 import { dataURLS } from "../../utils/dataUrls";
-<<<<<<< HEAD
 import { Suspense } from "react";
 import Loader from "@/app/components/Loader/Loader";
-=======
-import { serverFetch } from "@/lib/mock/server-fetch";
-import { notFound, redirect } from "next/navigation";
-import { TableSkeleton } from "@/app/components/Skeleton/Skeleton";
-import { Suspense } from "react";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 interface ParamsProps {
   id: string;
 }
-<<<<<<< HEAD
-=======
-
-export const dynamic = "force-dynamic";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 export const metadata: Metadata = {
   title: `Single Parent`,
@@ -36,15 +24,9 @@ export default async function SingleParentPage({
 }) {
   const { id } = await params;
   const cookiesData = await cookies();
-<<<<<<< HEAD
   const token = cookiesData.get("CLIENT_JLOOMS_TOKEN")?.value;
 
   const fetchparent = await fetch(`${dataURLS.singleParent}/${id}`, {
-=======
-  const token = cookiesData.get("SERVER_JLOOMS_TOKEN")?.value;
-
-  const fetchparent = await serverFetch(`${dataURLS.singleParent}/${id}`, {
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -54,7 +36,6 @@ export default async function SingleParentPage({
   });
   const response = await fetchparent?.json();
   const parent = response?.data?.parent;
-<<<<<<< HEAD
 
   if (!parent) {
     return (
@@ -66,13 +47,6 @@ export default async function SingleParentPage({
 
   return (
     <Suspense fallback={<Loader />}>
-=======
-  if (fetchparent.status === 401) redirect("/auth/login");
-  if (!fetchparent.ok || !parent) notFound();
-
-  return (
-    <Suspense fallback={<TableSkeleton />}>
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       <div className="w-full max-w-6xl bg-white shadow-md rounded-lg overflow-hidden">
         <DashBoardPageHead text={parent?.code || ""} haveBtn={false} />
         <div className="px-6 pt-4 pb-10 grid grid-cols-1 lg:grid-cols-12 gap-4">

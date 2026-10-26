@@ -105,28 +105,17 @@ export default function AddParentForm() {
             error={errors}
             type={input.type}
             lable={input.lableName}
-<<<<<<< HEAD
             id={`addParent${input.name}`}
             validation={input.validation}
           />
         )
-=======
-            id={`addTeacher${input.name}`}
-            validation={input.validation}
-          />
-        ),
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       )}
 
       <button
         type="submit"
         className="bg-indigo-500 transition-all duration-300 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded"
       >
-<<<<<<< HEAD
         Add Parent
-=======
-        Add Teacher
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       </button>
     </form>
   );

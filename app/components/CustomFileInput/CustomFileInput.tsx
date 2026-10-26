@@ -1,10 +1,5 @@
 import { CustomeInputProps } from "@/app/utils/interfaces";
-<<<<<<< HEAD
 import { FaCheck, FaPlus } from "react-icons/fa";
-=======
-import React from "react";
-import { FaPlus, FaCheck } from "react-icons/fa";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 import styles from "../CustomInput/customeInput.module.css";
 
 export default function CustomFileInput({
@@ -22,13 +17,9 @@ export default function CustomFileInput({
     <div className={`mb-1 ${styles.inputContainer}`}>
       <label
         htmlFor={id}
-<<<<<<< HEAD
         className={`${
           error?.[name] && styles.errorInput
         } flex items-center justify-between w-full px-4 py-4 border border-gray-300 rounded-lg cursor-pointer bg-gray-100 hover:bg-gray-200 transition-colors`}
-=======
-        className={`${error?.[name] && styles.errorInput} flex items-center justify-between w-full px-4 py-4 border border-gray-300 rounded-lg cursor-pointer bg-gray-100 hover:bg-gray-200 transition-colors`}
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       >
         <span className="text-lg font-semibold text-gray-700">{lable}</span>
         <span className="text-2xl text-gray-500">

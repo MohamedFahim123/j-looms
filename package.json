@@ -12,12 +12,8 @@
     "axios": "^1.7.7",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
-<<<<<<< HEAD
     "next": "^15.1.4",
-=======
-    "next": "15.0.3",
     "nextjs-toploader": "^3.9.17",
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.2",

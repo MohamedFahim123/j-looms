@@ -1,31 +1,19 @@
 "use client";
 
 import { FormAuthInputs, Validation } from "@/app/auth/utils/interfaces";
-<<<<<<< HEAD
 import { getTokenFromServerCookies } from "@/app/auth/utils/storeTokenOnServer";
 import { dataURLS } from "@/app/dashboard/utils/dataUrls";
 import { Action, Activity } from "@/app/dashboard/utils/interfaces";
 import axios from "axios";
 import { useCallback, useEffect } from "react";
-=======
-import { dataURLS } from "@/app/dashboard/utils/dataUrls";
-import { Action, Activity } from "@/app/dashboard/utils/interfaces";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 import {
   Controller,
   SubmitHandler,
   useFieldArray,
   useForm,
 } from "react-hook-form";
-<<<<<<< HEAD
 import { toast } from "react-toastify";
 import styles from "./addNewClassForm.module.css";
-=======
-import styles from "./addNewClassForm.module.css";
-import { submitApplicationJson } from "@/app/utils/submitApplicationJson";
-import { useCallback, useEffect } from "react";
-import SelectMenu from "../SelectMenu/SelectMenu";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 interface ClassInput {
   lableName: string;
@@ -101,26 +89,17 @@ export default function AddNewClassForm({
   const handleAddAction = useCallback(() => append({ id: "" }), [append]);
   const handleAddActivity = useCallback(
     () => appendOnAct({ id: "" }),
-<<<<<<< HEAD
     [appendOnAct]
   );
 
   const onSubmit: SubmitHandler<FormDefaultValues> = async (
     data: FormDefaultValues
-=======
-    [appendOnAct],
-  );
-
-  const onSubmit: SubmitHandler<FormDefaultValues> = (
-    data: FormDefaultValues,
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
   ) => {
     const formattedData = {
       name_en: data.name_en,
       actions: data.actions.map((action) => action.id),
       activities: data.activities.map((activity) => activity.id),
     };
-<<<<<<< HEAD
     const token = await getTokenFromServerCookies();
     const loadingToastId: string | number = toast.loading("Loading...");
     try {
@@ -166,11 +145,6 @@ export default function AddNewClassForm({
     }
   };
 
-=======
-    submitApplicationJson(formattedData, dataURLS.addNewClass, setError, reset);
-  };
-
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -191,15 +165,11 @@ export default function AddNewClassForm({
           id="addNewClassName"
           placeholder={classNameInput.placeholder}
           {...register("name_en", classNameInput.validation)}
-<<<<<<< HEAD
           className={`${
             styles.formInput
           } transition-all duration-300 focus:border-indigo-600 hover:border-indigo-600 ${
             errors?.name_en ? styles.errorInput : "border-gray-300"
           } bg-gray-50 border text-sm rounded-lg block w-full p-2.5`}
-=======
-          className={`${styles.formInput} transition-all duration-300 focus:border-indigo-600 hover:border-indigo-600 ${errors?.name_en ? styles.errorInput : "border-gray-300"} bg-gray-50 border text-sm rounded-lg block w-full p-2.5`}
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         />
         {errors?.name_en && (
           <p className={`${styles.error} text-red-500 text-xs`}>
@@ -222,7 +192,6 @@ export default function AddNewClassForm({
                 control={control}
                 defaultValue={item.id}
                 render={({ field }) => (
-<<<<<<< HEAD
                   <select
                     {...field}
                     className="mt-2 w-full transition-all duration-300 focus:border-indigo-600 hover:border-indigo-600 p-2 border rounded-lg outline-none"
@@ -236,22 +205,6 @@ export default function AddNewClassForm({
                       </option>
                     ))}
                   </select>
-=======
-                  <SelectMenu
-                    className="mt-2"
-                    value={
-                      field.value === undefined || field.value === null
-                        ? ""
-                        : String(field.value)
-                    }
-                    onChange={(value) => field.onChange(value)}
-                    placeholder="Choose Action"
-                    options={actions.map((action) => ({
-                      value: String(action.id),
-                      label: action.action,
-                    }))}
-                  />
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
                 )}
               />
             </div>
@@ -291,7 +244,6 @@ export default function AddNewClassForm({
                 control={control}
                 defaultValue={item.id}
                 render={({ field }) => (
-<<<<<<< HEAD
                   <select
                     {...field}
                     className="mt-2 w-full transition-all duration-300 focus:border-indigo-600 hover:border-indigo-600 p-2 border rounded-lg outline-none"
@@ -305,22 +257,6 @@ export default function AddNewClassForm({
                       </option>
                     ))}
                   </select>
-=======
-                  <SelectMenu
-                    className="mt-2"
-                    value={
-                      field.value === undefined || field.value === null
-                        ? ""
-                        : String(field.value)
-                    }
-                    onChange={(value) => field.onChange(value)}
-                    placeholder="Choose Activity"
-                    options={activities.map((activity) => ({
-                      value: String(activity.id),
-                      label: activity.name,
-                    }))}
-                  />
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
                 )}
               />
             </div>

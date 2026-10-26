@@ -13,11 +13,7 @@ type AuthEndPointType = keyof typeof authEndPoints;
 export const handleApplication_JsonData = async (
   data: FormAuthInputs,
   type: AuthEndPointType,
-<<<<<<< HEAD
   setError: UseFormSetError<FormAuthInputs>
-=======
-  setError: UseFormSetError<FormAuthInputs>,
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 ) => {
   const loadingToastId: string | number = toast.loading("Loading...");
   if (type === "login") {
@@ -45,7 +41,6 @@ export const handleApplication_JsonData = async (
       autoClose: 1500,
     });
 
-<<<<<<< HEAD
     const { token, school, employee } = response?.data?.data || {};
     if (token) {
       await setServerCookie("CLIENT_JLOOMS_TOKEN", token);
@@ -66,16 +61,6 @@ export const handleApplication_JsonData = async (
         secure: true,
       });
       setUserLoginned(employee);
-=======
-    const { token, school } = response?.data?.data || {};
-    if (token) {
-      await setServerCookie("JLOOMS_TOKEN", token);
-      Cookies.set("SERVER_JLOOMS_TOKEN", token, { expires: 7 });
-    }
-
-    if (school?.id) {
-      handleRegistrationCookies(type, school.id);
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
     }
 
     return "success";
@@ -96,13 +81,10 @@ function handleRegistrationCookies(type: AuthEndPointType, schoolId: string) {
     register3: "",
     resetPassword: "",
     forgetPassword: "",
-<<<<<<< HEAD
     employee_login: "",
     employee_logout: "",
     employee_resetPassword: "",
     employee_forgetPassword: "",
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
   };
 
   if (stepMapping[type]) {
@@ -110,17 +92,10 @@ function handleRegistrationCookies(type: AuthEndPointType, schoolId: string) {
   }
 }
 
-<<<<<<< HEAD
 export function handleError(
   error: unknown,
   setError: UseFormSetError<FormAuthInputs>,
   toastId: string | number
-=======
-function handleError(
-  error: unknown,
-  setError: UseFormSetError<FormAuthInputs>,
-  toastId: string | number,
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 ) {
   const errorMessage = axios.isAxiosError(error)
     ? error.response?.data?.message || "Something went wrong!"

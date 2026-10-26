@@ -9,20 +9,12 @@ export const submitApplicationJson = async (
   data: FormAuthInputs,
   endPoint: string,
   setError:
-<<<<<<< HEAD
     | UseFormSetError<FormAuthInputs>
     | UseFormSetError<FormDefaultValues>,
   reset: () => void
 ) => {
   const loadingToastId = toast.loading("Loading...");
   const token = await getTokenFromServerCookies();
-=======
-    UseFormSetError<FormAuthInputs> | UseFormSetError<FormDefaultValues>,
-  reset: () => void,
-) => {
-  const loadingToastId = toast.loading("Loading...");
-  const token = Cookies.get("SERVER_JLOOMS_TOKEN");
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
   try {
     const response = await axios.post(endPoint, data, {
       headers: {

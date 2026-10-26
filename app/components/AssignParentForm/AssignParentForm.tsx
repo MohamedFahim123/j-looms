@@ -9,12 +9,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CiSearch } from "react-icons/ci";
 import { toast } from "react-toastify";
-<<<<<<< HEAD
 import ParentCard from "../ParentCard/ParentCard";
-=======
-import axios from "axios";
-import SelectMenu from "../SelectMenu/SelectMenu";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 export interface ParentInterface {
   id?: number;
@@ -36,48 +31,29 @@ export default function AssignParentForm({
     setError,
     reset,
     watch,
-<<<<<<< HEAD
-=======
-    setValue,
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
     clearErrors,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormAuthInputs>();
-<<<<<<< HEAD
-=======
-  const token = Cookies.get("SERVER_JLOOMS_TOKEN");
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
   const [currParent, setCurrParent] = useState<ParentInterface>();
 
   const handleGetParentByCode = async () => {
     const parentId = watch("parent_id");
-<<<<<<< HEAD
     const token = await getTokenFromServerCookies();
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
     const loadingToastId = toast.loading("Loading...");
     try {
       if (parentId) {
         const response = await axios.get(
-<<<<<<< HEAD
           `${
             dataURLS.filterParentsByCode
           }?code=${parentId}&t=${new Date().getTime()}`,
-=======
-          `${dataURLS.filterParentsByCode}?code=${parentId}&t=${new Date().getTime()}`,
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
           {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
               Authorization: `Bearer ${token}`,
             },
-<<<<<<< HEAD
           }
-=======
-          },
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         );
         toast.update(loadingToastId, {
           render:
@@ -119,11 +95,7 @@ export default function AssignParentForm({
       { ...data, student_id: `${studentId}`, parent_id: `${currParent?.id}` },
       dataURLS.assignParentToStudent,
       setError,
-<<<<<<< HEAD
       reset
-=======
-      reset,
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
     );
     setCurrParent({});
     window.location.reload();
@@ -174,7 +146,6 @@ export default function AssignParentForm({
             >
               Relation
             </label>
-<<<<<<< HEAD
             <select
               id="type"
               defaultValue={""}
@@ -188,26 +159,6 @@ export default function AssignParentForm({
               <option value="mother">Mother</option>
               <option value="guardian">Guardian</option>
             </select>
-=======
-            <input
-              type="hidden"
-              {...register("type", { required: "Relation is required" })}
-            />
-            <SelectMenu
-              id="type"
-              value={watch("type") || ""}
-              onChange={(value) =>
-                setValue("type", value, { shouldValidate: true })
-              }
-              placeholder="Select Relation"
-              invalid={Boolean(errors.type)}
-              options={[
-                { value: "father", label: "Father" },
-                { value: "mother", label: "Mother" },
-                { value: "guardian", label: "Guardian" },
-              ]}
-            />
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
             {errors.type && (
               <p className="text-red-500 text-sm mt-1">{errors.type.message}</p>
             )}
@@ -221,15 +172,11 @@ export default function AssignParentForm({
         <button
           type="submit"
           disabled={!watch("parent_id") || !watch("type") || isSubmitting}
-<<<<<<< HEAD
           className={`${
             !watch("parent_id") || !watch("type") || isSubmitting
               ? "bg-indigo-400"
               : "bg-indigo-500 hover:bg-indigo-600 transition-all duration-300"
           } text-white font-medium py-2 px-4 rounded`}
-=======
-          className={`${!watch("parent_id") || !watch("type") || isSubmitting ? "bg-indigo-400" : "bg-indigo-500 hover:bg-indigo-600 transition-all duration-300"} text-white font-medium py-2 px-4 rounded`}
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         >
           Assign Parent
         </button>

@@ -1,15 +1,9 @@
 "use client";
 
-<<<<<<< HEAD
 import { getTokenFromServerCookies } from "@/app/auth/utils/storeTokenOnServer";
 import { dataURLS } from "@/app/dashboard/utils/dataUrls";
 import { toast } from "react-toastify";
 import MainDashBoardBtn from "../MainDashBoardBtn/MainDashBoardBtn";
-=======
-import { useTeacherStatus } from "@/app/hooks/useTeacherStatus";
-import MainDashBoardBtn from "../MainDashBoardBtn/MainDashBoardBtn";
-import SelectMenu from "../SelectMenu/SelectMenu";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 interface Option {
   label: string;
@@ -21,10 +15,7 @@ interface Option {
 interface DashBoardPageHeadProps {
   text: string;
   teacherId?: string;
-<<<<<<< HEAD
   employeeId?: string;
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
   btnText?: string;
   btnLink?: string;
   haveBtn?: boolean;
@@ -37,10 +28,7 @@ interface DashBoardPageHeadProps {
 
 export default function DashBoardPageHead({
   teacherId,
-<<<<<<< HEAD
   employeeId,
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
   text,
   haveSecondBtn,
   secBtnText,
@@ -51,7 +39,6 @@ export default function DashBoardPageHead({
   haveFilter,
   filterOptions,
 }: DashBoardPageHeadProps) {
-<<<<<<< HEAD
   const handleUpdateStatus = async (e: {
     target: HTMLSelectElement;
   }): Promise<void> => {
@@ -123,10 +110,6 @@ export default function DashBoardPageHead({
     }
   };
 
-=======
-  const statusControl = useTeacherStatus(teacherId, filterOptions);
-
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
   return (
     <>
       <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
@@ -147,7 +130,6 @@ export default function DashBoardPageHead({
           </div>
         )}
         {haveFilter && (
-<<<<<<< HEAD
           <select
             onChange={handleUpdateStatus}
             defaultValue={
@@ -165,18 +147,6 @@ export default function DashBoardPageHead({
               </option>
             ))}
           </select>
-=======
-          <SelectMenu
-            className="w-full md:w-52"
-            value={statusControl.value}
-            onChange={statusControl.updateStatus}
-            options={(filterOptions ?? []).map((option) => ({
-              value: option.value,
-              label: option.label,
-              disabled: option.disabled,
-            }))}
-          />
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         )}
       </div>
     </>

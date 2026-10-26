@@ -31,7 +31,6 @@ export interface FormAuthInputs {
   name_en?: string;
   actions?: string[];
   activities?: string[];
-<<<<<<< HEAD
 
   class?: string;
   topic?: string;
@@ -60,8 +59,6 @@ export interface FormAuthInputs {
   curriculum_sub_category_id?: string;
   milestones?: [];
   [key: `curriculum_sub_category_id_${string}`]: string;
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 }
 
 interface Pattern {

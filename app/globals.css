@@ -41,7 +41,6 @@ a {
   color: #f9f9f9 !important;
 }
 
-<<<<<<< HEAD
 /* loader*/
 /* From Uiverse.io by gustavofusco */
 .pencil {
@@ -227,57 +226,5 @@ a {
   to {
     stroke-dashoffset: 439.82;
     transform: translate(100px, 100px) rotate(112deg);
-=======
-.skeleton {
-  background: linear-gradient(90deg, #eef0f6 0%, #f8f9fd 45%, #eef0f6 80%);
-  background-size: 700px 100%;
-  animation: shimmer 1.35s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-}
-
-.page-enter {
-  animation: rise 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.menu-pop {
-  animation: menu-in 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -420px 0;
-  }
-  100% {
-    background-position: 420px 0;
-  }
-}
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes menu-in {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .skeleton,
-  .page-enter,
-  .menu-pop {
-    animation: none;
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
   }
 }

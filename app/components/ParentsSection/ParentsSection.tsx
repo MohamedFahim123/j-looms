@@ -3,23 +3,14 @@
 import { getTokenFromServerCookies } from "@/app/auth/utils/storeTokenOnServer";
 import { dataURLS } from "@/app/dashboard/utils/dataUrls";
 import { Table } from "@/app/dashboard/utils/interfaces";
-<<<<<<< HEAD
 import { useLoginnedUserStore } from "@/app/store/useCurrLoginnedUser";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-=======
-import { useDashboardList } from "@/app/hooks/useDashboardList";
-import { dataURLS } from "@/app/dashboard/utils/dataUrls";
-import Cookies from "js-cookie";
-import { useSearchParams } from "next/navigation";
-import DashBoardPageHead from "../DashBoardPageHead/DashBoardPageHead";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 import DashBoardFilterations from "../DashBoardFilterations/DashBoardFilterations";
 import DashBoardPageHead from "../DashBoardPageHead/DashBoardPageHead";
 import DashBoardTable from "../DashBoardTable/DashBoardTable";
 import Loader from "../Loader/Loader";
 import Pagination from "../Pagination/Pagination";
-<<<<<<< HEAD
 
 let loading: boolean = true;
 async function fetchparentsData(
@@ -50,41 +41,10 @@ async function fetchparentsData(
     data: data?.data?.parents || [],
     totalPages: data?.meta?.totalPages || 1,
   };
-=======
-import ListFrame from "../ListFrame/ListFrame";
-
-async function fetchParents(filters: Record<string, string>) {
-  const token = Cookies.get("SERVER_JLOOMS_TOKEN");
-  const queryParams = new URLSearchParams();
-  if (filters.name) queryParams.set("q", filters.name);
-  if (filters.page) queryParams.set("page", filters.page);
-  const apiUrl = filters.name
-    ? `${dataURLS.filterParents}?${queryParams.toString()}&t=${Date.now()}`
-    : `${dataURLS.allParents}?${queryParams.toString()}&t=${Date.now()}`;
-  try {
-    const response = await fetch(apiUrl, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    if (!response.ok)
-      return { data: [] as Table[], totalPages: 0, error: true };
-    const data = await response.json();
-    return {
-      data: (data?.data?.parents || []) as Table[],
-      totalPages: data?.meta?.totalPages || 0,
-    };
-  } catch {
-    return { data: [] as Table[], totalPages: 0, error: true };
-  }
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 }
 
 export default function ParentsSection() {
   const searchParams = useSearchParams();
-<<<<<<< HEAD
   const [filters, setFilters] = useState<Record<string, string | number>>({});
   const [parents, setParents] = useState<Table[]>([]);
   const [totalPages, setTotalPages] = useState(1);
@@ -130,17 +90,6 @@ export default function ParentsSection() {
             ? true
             : false
         }
-=======
-  const list = useDashboardList<Table>(searchParams.toString(), fetchParents);
-  const tableCells = ["Parent Name", "Code", "Mobile", "Email", "Remove"];
-
-  return (
-    <div className="w-full overflow-hidden rounded-lg bg-white shadow-md">
-      <DashBoardPageHead
-        text="Parents"
-        btnText="Add Parent"
-        haveBtn={true}
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         btnLink="/dashboard/parents/add-parent"
       />
       <DashBoardFilterations
@@ -148,7 +97,6 @@ export default function ParentsSection() {
         page="parents"
         placeHolder="Find a Parent"
       />
-<<<<<<< HEAD
       <div className="overflow-x-auto">
         {loading ? (
           <Loader />
@@ -172,26 +120,6 @@ export default function ParentsSection() {
           </div>
         )}
       </div>
-=======
-      <ListFrame
-        status={list.status}
-        empty={list.rows.length === 0}
-        emptyLabel="No parents yet."
-        onRetry={list.retry}
-      >
-        <div className="overflow-x-auto">
-          <DashBoardTable
-            tableData={list.rows}
-            tableCells={tableCells}
-            currPage="parents"
-          />
-          <Pagination
-            totalPages={list.totalPages}
-            currentPage={Number(list.filters.page) || 1}
-          />
-        </div>
-      </ListFrame>
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
     </div>
   );
 }

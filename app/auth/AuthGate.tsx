@@ -2,13 +2,13 @@
 
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { useEffect, type ReactNode } from "react";
+import { useEffect } from "react";
 
 export function AuthGate() {
   const router = useRouter();
 
   useEffect(() => {
-    if (Cookies.get("SERVER_JLOOMS_TOKEN")) {
+    if (Cookies.get("CLIENT_JLOOMS_TOKEN")) {
       router.push("/dashboard/profile");
     }
   }, [router]);

@@ -1,33 +1,20 @@
 import axios from "axios";
 import { UseFormSetError } from "react-hook-form";
-<<<<<<< HEAD
 import { toast } from "react-toastify";
 import { FormAuthInputs } from "../auth/utils/interfaces";
 import { getTokenFromServerCookies } from "../auth/utils/storeTokenOnServer";
-=======
-import { FormAuthInputs } from "../auth/utils/interfaces";
-import Cookies from "js-cookie";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 import { FormDefaultValues } from "../components/AddNewClassForm/AddNewClassForm";
 
 export const handleMultiPartWebSiteFormData = async (
   data: FormAuthInputs,
   endPoint: string,
   setError:
-<<<<<<< HEAD
     | UseFormSetError<FormAuthInputs>
     | UseFormSetError<FormDefaultValues>,
   reset: () => void
 ) => {
   const loadingToastId = toast.loading("Loading...");
   const token = await getTokenFromServerCookies();
-=======
-    UseFormSetError<FormAuthInputs> | UseFormSetError<FormDefaultValues>,
-  reset: () => void,
-) => {
-  const loadingToastId = toast.loading("Loading...");
-  const token = Cookies.get("SERVER_JLOOMS_TOKEN");
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
   try {
     const formData = new FormData();
@@ -37,16 +24,10 @@ export const handleMultiPartWebSiteFormData = async (
       if (key === "image") {
         if (value instanceof FileList && value.length > 0) {
           formData.append(key, value[0]);
-<<<<<<< HEAD
         } else if (value instanceof File && value.name) {
           formData.append(key, value);
         }
         
-=======
-        } else {
-          formData.append(key, "");
-        }
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       } else if (typeof value === "object" && value !== null) {
         formData.append(key, JSON.stringify(value));
       } else if (value !== undefined && value !== null) {

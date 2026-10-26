@@ -1,5 +1,4 @@
 import DashBoardPageHead from "@/app/components/DashBoardPageHead/DashBoardPageHead";
-<<<<<<< HEAD
 import DashBoardTable from "@/app/components/DashBoardTable/DashBoardTable";
 import Loader from "@/app/components/Loader/Loader";
 import SingleStudentView from "@/app/components/SingleStudentView/SingleStudentView";
@@ -8,17 +7,6 @@ import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 import { dataURLS } from "../../utils/dataUrls";
-=======
-import SingleStudentView from "@/app/components/SingleStudentView/SingleStudentView";
-import { Metadata } from "next";
-import { cookies } from "next/headers";
-import { dataURLS } from "../../utils/dataUrls";
-import DashBoardTable from "@/app/components/DashBoardTable/DashBoardTable";
-import { serverFetch } from "@/lib/mock/server-fetch";
-import { notFound, redirect } from "next/navigation";
-import { Suspense } from "react";
-import { TableSkeleton } from "@/app/components/Skeleton/Skeleton";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 interface ParamsProps {
   id: string;
@@ -27,11 +15,6 @@ interface ParamsProps {
 interface StudentsDetailsProps {
   params: Promise<ParamsProps>;
 }
-<<<<<<< HEAD
-=======
-
-export const dynamic = "force-dynamic";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 export const metadata: Metadata = {
   title: `Student Details`,
@@ -42,16 +25,10 @@ export default async function SingleStudentPage({
 }: StudentsDetailsProps) {
   const { id } = await params;
   const cookiesData = await cookies();
-<<<<<<< HEAD
   const token = cookiesData.get("CLIENT_JLOOMS_TOKEN")?.value;
   const { userLoginned, userLoginnedType } = useLoginnedUserStore.getState();
 
   const fetchTeacher = await fetch(`${dataURLS.singleStudent}/${id}`, {
-=======
-  const token = cookiesData.get("SERVER_JLOOMS_TOKEN")?.value;
-
-  const fetchTeacher = await serverFetch(`${dataURLS.singleStudent}/${id}`, {
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -60,7 +37,6 @@ export default async function SingleStudentPage({
     },
   });
   const response = await fetchTeacher?.json();
-<<<<<<< HEAD
 
   const student = response?.data?.student;
   const tableCells =
@@ -72,28 +48,12 @@ export default async function SingleStudentPage({
 
   return (
     <Suspense fallback={<Loader />}>
-=======
-  const student = response?.data?.student;
-  if (fetchTeacher.status === 401) redirect("/auth/login");
-  if (!fetchTeacher.ok || !student) notFound();
-  const tableCells = [
-    "Parent Name",
-    "Parent Code",
-    "Relation",
-    "Mobile",
-    "Remove",
-  ];
-
-  return (
-    <Suspense fallback={<TableSkeleton />}>
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       <div className="w-full max-w-6xl bg-white shadow-md rounded-lg overflow-hidden">
         <DashBoardPageHead
           text={`code: ${student?.code}` || ""}
           haveBtn={false}
         />
         <SingleStudentView student={student} />
-<<<<<<< HEAD
         {userLoginnedType === "Admin"
           ? student?.parents?.length > 0 && (
               <DashBoardTable
@@ -112,16 +72,6 @@ export default async function SingleStudentPage({
                 currStudentId={id}
               />
             )}
-=======
-        {student?.parents?.length > 0 && (
-          <DashBoardTable
-            currPage="singleStudent"
-            tableCells={tableCells}
-            tableData={student?.parents}
-            currStudentId={id}
-          />
-        )}
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       </div>
     </Suspense>
   );

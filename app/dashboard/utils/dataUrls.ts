@@ -2,11 +2,7 @@ import { baseUrl } from "@/app/utils/baseUrl";
 import Cookies from "js-cookie";
 import { DATAURLSINTERFACE } from "./interfaces";
 
-<<<<<<< HEAD
 export const token = Cookies.get("CLIENT_JLOOMS_TOKEN");
-=======
-export const token = Cookies.get("SERVER_JLOOMS_TOKEN");
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 export const dataURLS: DATAURLSINTERFACE = {
   teachers: `${baseUrl}/school/all-teachers`,
@@ -39,7 +35,6 @@ export const dataURLS: DATAURLSINTERFACE = {
   filterParentsByCode: `${baseUrl}/school/filter-parents`,
   filterParents: `${baseUrl}/school/search-parents`,
   allowedTeachers: `${baseUrl}/school/allowed-teachers`,
-<<<<<<< HEAD
   addActionToClass: `${baseUrl}/school/add-class-action`,
   addActivityToClass: `${baseUrl}/school/add-class-activity`,
   editActionInsideClass: `${baseUrl}/school/update-class-action`,
@@ -65,10 +60,4 @@ export const dataURLS: DATAURLSINTERFACE = {
   addCurriculum: `${baseUrl}/school/add-curriculum`,
   removeCurriculum: `${baseUrl}/school/delete-curriculum`,
   curriculumsFilter: `${baseUrl}/school/filter-curriculums`,
-=======
-  addOptionToClass: `${baseUrl}/school/add-class-option`,
-  editOptionInsideClass: `${baseUrl}/school/update-class-option`,
-  removeOptionFromClass: `${baseUrl}/school/delete-class-option`,
-  assignTeacherToClassOption: `${baseUrl}/school/assign-teachers`,
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 };

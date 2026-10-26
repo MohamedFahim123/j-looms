@@ -1,14 +1,9 @@
 "use client";
 
-<<<<<<< HEAD
 import { getTokenFromServerCookies } from "@/app/auth/utils/storeTokenOnServer";
 import { dataURLS } from "@/app/dashboard/utils/dataUrls";
 import { useClassesStore } from "@/app/store/getAllClasses";
 import { useLoginnedUserStore } from "@/app/store/useCurrLoginnedUser";
-=======
-import { dataURLS } from "@/app/dashboard/utils/dataUrls";
-import { useClassesStore } from "@/app/store/getAllClasses";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 import axios from "axios";
 import Cookies from "js-cookie";
 import Image from "next/image";
@@ -17,10 +12,6 @@ import { useState } from "react";
 import { FaEnvelope, FaGraduationCap } from "react-icons/fa";
 import { toast } from "react-toastify";
 import Avatar from "../../imgs/teachers/teacher1.png";
-<<<<<<< HEAD
-=======
-import SelectMenu from "../SelectMenu/SelectMenu";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 interface SingleStudent {
   id: number | string;
@@ -42,14 +33,9 @@ export default function SingleStudentView({
   student: SingleStudent;
 }) {
   const [currClassId, setCurrClassId] = useState<string | number>();
-<<<<<<< HEAD
   const { userLoginned, userLoginnedType } = useLoginnedUserStore();
   const [status, setStatus] = useState<string>(
     student?.class_name === "N/A" ? "update" : "assigned"
-=======
-  const [status, setStatus] = useState<string>(
-    student?.class_name === "N/A" ? "update" : "assigned",
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
   );
   const { classes } = useClassesStore();
 
@@ -60,11 +46,7 @@ export default function SingleStudentView({
         student_id: `${student?.id}`,
       };
       const loadingToastId = toast.loading("Loading...");
-<<<<<<< HEAD
       const token = await getTokenFromServerCookies();
-=======
-      const token = Cookies.get("SERVER_JLOOMS_TOKEN");
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       try {
         const response = await axios.post(dataURLS.assignStudentToClass, data, {
           headers: {
@@ -124,7 +106,6 @@ export default function SingleStudentView({
             </Link>
           </div>
         </div>
-<<<<<<< HEAD
         {userLoginnedType === "Admin" ? (
           <div className="flex space-x-4">
             <Link
@@ -152,19 +133,6 @@ export default function SingleStudentView({
             </div>
           )
         )}
-=======
-        <div className="flex space-x-4">
-          <Link
-            className="text-indigo-500 underline hover:text-indigo-600 transition-all duration-300"
-            onClick={() => {
-              Cookies.set("student_id", `${student?.id}`);
-            }}
-            href={`/dashboard/students/${student?.id}/assign-parent`}
-          >
-            Assign Parents
-          </Link>
-        </div>
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       </div>
       <div className="lg:col-span-8 mt-8">
         <h3 className="text-lg font-semibold text-gray-800 mb-5 flex items-center gap-2">
@@ -182,7 +150,6 @@ export default function SingleStudentView({
               <li className="flex items-center gap-2">
                 <span className="font-semibold text-gray-800">Class Name:</span>
                 {status === "update" ? (
-<<<<<<< HEAD
                   userLoginnedType === "Admin" ? (
                     <select
                       defaultValue={
@@ -228,25 +195,6 @@ export default function SingleStudentView({
                   ) : (
                     <span>{student?.class_name}</span>
                   )
-=======
-                  <SelectMenu
-                    className="w-56"
-                    value={String(
-                      currClassId ??
-                        (student?.class_name !== "N/A"
-                          ? (classes?.find(
-                              (item) => item?.name === student?.class_name,
-                            )?.id ?? "")
-                          : ""),
-                    )}
-                    onChange={(value) => setCurrClassId(value)}
-                    placeholder="Assign a Class"
-                    options={(classes ?? []).map((item) => ({
-                      value: String(item.id),
-                      label: item.name,
-                    }))}
-                  />
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
                 ) : (
                   <span>{student?.class_name}</span>
                 )}
@@ -265,7 +213,6 @@ export default function SingleStudentView({
           )}
         </ul>
         {status === "update" ? (
-<<<<<<< HEAD
           userLoginnedType === "Admin" ? (
             <div className="mt-4 flex items-center gap-2">
               <button
@@ -288,17 +235,6 @@ export default function SingleStudentView({
             )
           )
         ) : userLoginnedType === "Admin" ? (
-=======
-          <div className="mt-4 flex items-center gap-2">
-            <button
-              onClick={handleAssignToClass}
-              className="px-6 py-2 border rounded-md text-white bg-[#10B981]"
-            >
-              Assign to Class
-            </button>
-          </div>
-        ) : (
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
           <div className="flex items-center gap-2 mt-4">
             <button
               onClick={() => setStatus("update")}
@@ -307,7 +243,6 @@ export default function SingleStudentView({
               Update Class
             </button>
           </div>
-<<<<<<< HEAD
         ) : (
           userLoginned?.permissions?.includes("Assign Students") && (
             <div className="flex items-center gap-2 mt-4">
@@ -319,8 +254,6 @@ export default function SingleStudentView({
               </button>
             </div>
           )
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         )}
       </div>
     </div>

@@ -4,7 +4,6 @@ import { getTokenFromServerCookies } from "@/app/auth/utils/storeTokenOnServer";
 import { OPTION } from "@/app/dashboard/classes/[id]/page";
 import { dataURLS } from "@/app/dashboard/utils/dataUrls";
 import { teacherInterface } from "@/app/dashboard/utils/interfaces";
-<<<<<<< HEAD
 import { useLoginnedUserStore } from "@/app/store/useCurrLoginnedUser";
 import axios from "axios";
 import { useCallback, useState } from "react";
@@ -12,9 +11,6 @@ import { FaGraduationCap } from "react-icons/fa";
 import { toast } from "react-toastify";
 import SingleClassRowOfAction from "../SingleClassRowOfAction/SingleClassRowOfAction";
 import SingleClassRowOfTeacher from "../SingleClassRowOfTeacher/SingleClassRowOfTeacher";
-=======
-import { useState } from "react";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 interface ActionOrActivitySectionProps {
   allowedTeachers: teacherInterface[];
@@ -23,10 +19,7 @@ interface ActionOrActivitySectionProps {
   allActivities: OPTION[];
   allActions: OPTION[];
   id: string;
-<<<<<<< HEAD
   teachers: teacherInterface[];
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 }
 
 export default function ActionOrActivitySection({
@@ -36,7 +29,6 @@ export default function ActionOrActivitySection({
   allowedTeachers,
   activityArray,
   id,
-<<<<<<< HEAD
   teachers,
 }: ActionOrActivitySectionProps) {
   const [currActionsState, setCurrActionsState] = useState<"adding" | "submit">(
@@ -144,52 +136,6 @@ export default function ActionOrActivitySection({
     [actions, activities, currTeachers]
   );
 
-=======
-}: ActionOrActivitySectionProps) {
-  const [currActionsState, setCurrActionsState] = useState<"adding" | "submit">(
-    "adding",
-  );
-  const [currActivitiesState, setCurrActivitiesState] = useState<
-    "adding" | "submit"
-  >("adding");
-  const [actions, setActions] = useState<OPTION[]>(actionArray);
-  const [activities, setActivities] = useState<OPTION[]>(activityArray);
-
-  const handleAddMoreActionOrActivity = (type: "Action" | "Activity") => {
-    if (type === "Action") {
-      setActions([
-        ...actions,
-        {
-          id: Math.random(),
-          name_ar: "",
-          name_en: "",
-          teachers: [],
-          icon: "",
-          type: "",
-          action: "",
-          name: "",
-        },
-      ]);
-      setCurrActionsState("submit");
-    } else if (type === "Activity") {
-      setActivities([
-        ...activities,
-        {
-          id: Math.random(),
-          name_ar: "",
-          name_en: "",
-          teachers: [],
-          icon: "",
-          action: "",
-          type: "",
-          name: "",
-        },
-      ]);
-      setCurrActivitiesState("submit");
-    }
-  };
-
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
   return (
     <div className="px-6 pt-4 pb-10 grid grid-cols-1 lg:grid-cols-12 gap-4">
       <div className="lg:col-span-12 mt-8">
@@ -197,7 +143,6 @@ export default function ActionOrActivitySection({
           <span className="flex items-center justify-center w-14 h-14 bg-[#EBECFA] rounded-lg">
             <FaGraduationCap size={32} className="text-[#8A8A8A]" />
           </span>
-<<<<<<< HEAD
           Teachers
         </h3>
 
@@ -263,15 +208,12 @@ export default function ActionOrActivitySection({
           <span className="flex items-center justify-center w-14 h-14 bg-[#EBECFA] rounded-lg">
             <FaGraduationCap size={32} className="text-[#8A8A8A]" />
           </span>
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
           Actions
         </h3>
         {actions
           ? actions?.map((option: OPTION, idx) => (
               <div
                 key={option?.id}
-<<<<<<< HEAD
                 className={`${
                   idx + 1 !== actions.length && "border-y border-t-0"
                 } py-6`}
@@ -283,11 +225,6 @@ export default function ActionOrActivitySection({
                   setCurrActionsState={setCurrActionsState}
                   actions={actions}
                   activities={activities}
-=======
-                className={`${idx + 1 !== actionArray.length && "border-y border-t-0"} py-6`}
-              >
-                <SingleClassRowOfAction
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
                   allActions={allActions}
                   allActivities={allActivities}
                   classId={id}
@@ -300,7 +237,6 @@ export default function ActionOrActivitySection({
           : actionArray?.map((option: OPTION, idx) => (
               <div
                 key={option.id}
-<<<<<<< HEAD
                 className={`${
                   idx + 1 !== actionArray.length && "border-y border-t-0"
                 } py-6`}
@@ -312,11 +248,6 @@ export default function ActionOrActivitySection({
                   setCurrActionsState={setCurrActionsState}
                   actions={actions}
                   activities={activities}
-=======
-                className={`${idx + 1 !== actionArray.length && "border-y border-t-0"} py-6`}
-              >
-                <SingleClassRowOfAction
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
                   allActions={allActions}
                   allActivities={allActivities}
                   classId={id}
@@ -326,7 +257,6 @@ export default function ActionOrActivitySection({
                 />
               </div>
             ))}
-<<<<<<< HEAD
         {userLoginnedType === "Admin"
           ? currActionsState === "adding" && (
               <div className="flex justify-center mt-6">
@@ -364,38 +294,18 @@ export default function ActionOrActivitySection({
                 </button>
               </div>
             )}
-=======
-        {currActionsState === "adding" && (
-          <div className="flex justify-center mt-6">
-            <button
-              onClick={() => {
-                handleAddMoreActionOrActivity("Action");
-              }}
-              type={"button"}
-              className={`m-auto border-y border-x ${currActionsState === "adding" ? "hover:bg-white border-blue-700 text-white hover:text-blue-700 rounded-lg bg-blue-700" : "hover:bg-white text-white hover:text-green-700 rounded-lg bg-green-700 border-green-700"} border-x border-y transition-all duration-300 font-semibold py-2 px-4`}
-            >
-              Add Action
-            </button>
-          </div>
-        )}
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       </div>
       <div className="lg:col-span-12 mt-8">
         <h3 className="text-lg font-semibold text-gray-800 mb-5 flex items-center gap-2">
           <span className="flex items-center justify-center w-14 h-14 bg-[#EBECFA] rounded-lg">
             <FaGraduationCap size={32} className="text-[#8A8A8A]" />
           </span>
-<<<<<<< HEAD
           Activities / Subjects
-=======
-          Activities
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         </h3>
         {activities
           ? activities?.map((option: OPTION, idx) => (
               <div
                 key={option.id}
-<<<<<<< HEAD
                 className={`${
                   idx + 1 !== activities?.length && "border-y border-t-0"
                 } py-6`}
@@ -407,11 +317,6 @@ export default function ActionOrActivitySection({
                   setCurrActionsState={setCurrActionsState}
                   actions={actions}
                   activities={activities}
-=======
-                className={`${idx + 1 !== actionArray.length && "border-y border-t-0"} py-6`}
-              >
-                <SingleClassRowOfAction
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
                   allActions={allActions}
                   allActivities={allActivities}
                   classId={id}
@@ -424,7 +329,6 @@ export default function ActionOrActivitySection({
           : activityArray?.map((option: OPTION, idx) => (
               <div
                 key={option?.id}
-<<<<<<< HEAD
                 className={`${
                   idx + 1 !== activityArray?.length && "border-y border-t-0"
                 } py-6`}
@@ -436,11 +340,6 @@ export default function ActionOrActivitySection({
                   setCurrActionsState={setCurrActionsState}
                   actions={actions}
                   activities={activities}
-=======
-                className={`${idx + 1 !== actionArray.length && "border-y border-t-0"} py-6`}
-              >
-                <SingleClassRowOfAction
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
                   allActions={allActions}
                   allActivities={allActivities}
                   classId={id}
@@ -450,7 +349,6 @@ export default function ActionOrActivitySection({
                 />
               </div>
             ))}
-<<<<<<< HEAD
         {userLoginnedType === "Admin"
           ? currActivitiesState === "adding" && (
               <div className="flex justify-center mt-6">
@@ -488,21 +386,6 @@ export default function ActionOrActivitySection({
                 </button>
               </div>
             )}
-=======
-        {currActivitiesState === "adding" && (
-          <div className="flex justify-center mt-6">
-            <button
-              onClick={() => {
-                handleAddMoreActionOrActivity("Activity");
-              }}
-              type={"button"}
-              className={`m-auto border-y border-x ${currActivitiesState === "adding" ? "hover:bg-white border-blue-700 text-white hover:text-blue-700 rounded-lg bg-blue-700" : "hover:bg-white text-white hover:text-green-700 rounded-lg bg-green-700 border-green-700"} border-x border-y transition-all duration-300 font-semibold py-2 px-4`}
-            >
-              Add Activity
-            </button>
-          </div>
-        )}
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       </div>
     </div>
   );

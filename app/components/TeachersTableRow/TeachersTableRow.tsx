@@ -11,19 +11,10 @@ import { useRouter } from "next/navigation";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import avatar from "../../imgs/teachers/teacher1.png";
-<<<<<<< HEAD
 
 export default function TeachersTableRow({ cell }: TableRowProps) {
   const router = useRouter();
   const { userLoginned, userLoginnedType } = useLoginnedUserStore();
-=======
-import axios from "axios";
-import { dataURLS } from "@/app/dashboard/utils/dataUrls";
-import Cookies from "js-cookie";
-
-export default function TeachersTableRow({ cell }: TableRowProps) {
-  const router = useRouter();
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
   const handleDelete = () => {
     Swal.fire({
@@ -32,10 +23,7 @@ export default function TeachersTableRow({ cell }: TableRowProps) {
       confirmButtonColor: "#ff2020",
       confirmButtonText: "Yes, Remove",
     }).then(async (result) => {
-<<<<<<< HEAD
       const token = await getTokenFromServerCookies();
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       if (result.isConfirmed) {
         const res = await axios.delete(
           `${dataURLS.deleteTeacher}/${cell?.id}`,
@@ -43,15 +31,9 @@ export default function TeachersTableRow({ cell }: TableRowProps) {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-<<<<<<< HEAD
               Authorization: `Bearer ${token}`,
             },
           }
-=======
-              Authorization: `Bearer ${Cookies.get("SERVER_JLOOMS_TOKEN")}`,
-            },
-          },
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         );
         if (res.status === 200) {
           Swal.fire({
@@ -136,7 +118,6 @@ export default function TeachersTableRow({ cell }: TableRowProps) {
           {cell.status}
         </span>
       </td>
-<<<<<<< HEAD
       {userLoginnedType === "Admin" ? (
         <td className="py-3 px-4 cursor-default">
           <span className={`px-2 py-1 text-xs font-semibold text-red-600`}>
@@ -160,17 +141,6 @@ export default function TeachersTableRow({ cell }: TableRowProps) {
           </td>
         )
       )}
-=======
-      <td className="py-3 px-4 cursor-default">
-        <span className={`px-2 py-1 text-xs font-semibold text-red-600`}>
-          <MdDelete
-            onClick={handleDelete}
-            size={20}
-            className="cursor-pointer"
-          />
-        </span>
-      </td>
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
     </tr>
   );
 }

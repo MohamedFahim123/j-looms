@@ -20,15 +20,12 @@ export interface Table {
   has_parents?: boolean;
   code?: string;
   relation?: string;
-<<<<<<< HEAD
   date_from?: string;
   date_to?: string;
   type?: string;
   category?: string;
   sub_category?: string;
   activity?: string;
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 }
 export interface DATAURLSINTERFACE {
   teachers: string;
@@ -61,7 +58,6 @@ export interface DATAURLSINTERFACE {
   removeParentFromStudent: string;
   deleteParent: string;
   allowedTeachers: string;
-<<<<<<< HEAD
   removeActionFromClass: string;
   removeActivityFromClass: string;
   assignTeacherToClass: string;
@@ -87,12 +83,6 @@ export interface DATAURLSINTERFACE {
   removeCurriculum: string;
   singleCurriculum: string;
   curriculumsFilter: string;
-=======
-  removeOptionFromClass: string;
-  assignTeacherToClassOption: string;
-  addOptionToClass: string;
-  editOptionInsideClass: string;
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 }
 export interface teacherInterface {
   id: number | string;
@@ -104,10 +94,7 @@ export interface teacherInterface {
   status: string;
   gender: string;
   locale: string;
-<<<<<<< HEAD
   activities: Activity[];
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 }
 
 export interface Action {

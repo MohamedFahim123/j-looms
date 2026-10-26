@@ -3,21 +3,13 @@
 import { CustomPasswordInput } from "@/app/auth/utils/customInputsValues";
 import { FormAuthInputs, Validation } from "@/app/auth/utils/interfaces";
 import { dataURLS } from "@/app/dashboard/utils/dataUrls";
-<<<<<<< HEAD
-=======
-import styles from "./addStudentForm.module.css";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 import { useClassesStore } from "@/app/store/getAllClasses";
 import { handleMultiPartWebSiteFormData } from "@/app/utils/submitFormData";
 import { useMemo } from "react";
-<<<<<<< HEAD
 import { SubmitHandler, useForm } from "react-hook-form";
 import CustomFileInput from "../CustomFileInput/CustomFileInput";
 import CustomeInput from "../CustomInput/CustomeInput";
 import styles from "./addStudentForm.module.css";
-=======
-import SelectMenu from "../SelectMenu/SelectMenu";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 interface StudentInput {
   lableName: string;
@@ -33,10 +25,6 @@ export default function AddStudentForm() {
     watch,
     setError,
     reset,
-<<<<<<< HEAD
-=======
-    setValue,
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
     handleSubmit,
     formState: { errors },
   } = useForm<FormAuthInputs>();
@@ -121,7 +109,6 @@ export default function AddStudentForm() {
         >
           Gender
         </label>
-<<<<<<< HEAD
         <select
           defaultValue={""}
           {...register("gender", { required: "Gender is required" })}
@@ -135,24 +122,6 @@ export default function AddStudentForm() {
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
-=======
-        <input
-          type="hidden"
-          {...register("gender", { required: "Gender is required" })}
-        />
-        <SelectMenu
-          value={watch("gender") || ""}
-          onChange={(value) =>
-            setValue("gender", value, { shouldValidate: true })
-          }
-          placeholder="Select gender"
-          invalid={Boolean(errors.gender)}
-          options={[
-            { value: "male", label: "Male" },
-            { value: "female", label: "Female" },
-          ]}
-        />
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         {errors.gender && (
           <p className="text-red-500 text-sm">{errors.gender.message}</p>
         )}
@@ -163,7 +132,6 @@ export default function AddStudentForm() {
         >
           Class
         </label>
-<<<<<<< HEAD
         <select
           defaultValue={""}
           {...register("grade_id", { required: "class is required" })}
@@ -180,24 +148,6 @@ export default function AddStudentForm() {
             </option>
           ))}
         </select>
-=======
-        <input
-          type="hidden"
-          {...register("grade_id", { required: "class is required" })}
-        />
-        <SelectMenu
-          value={watch("grade_id") || ""}
-          onChange={(value) =>
-            setValue("grade_id", value, { shouldValidate: true })
-          }
-          placeholder="Select class"
-          invalid={Boolean(errors.grade_id)}
-          options={(classes ?? []).map((cls) => ({
-            value: String(cls.id),
-            label: cls.name,
-          }))}
-        />
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         {errors.grade_id && (
           <p className="text-red-500 text-sm">{errors.grade_id.message}</p>
         )}
@@ -230,11 +180,7 @@ export default function AddStudentForm() {
             id={`addstudent${input.name}`}
             validation={input.validation}
           />
-<<<<<<< HEAD
         )
-=======
-        ),
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       )}
       <button
         type="submit"

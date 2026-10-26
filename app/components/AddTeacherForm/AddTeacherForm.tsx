@@ -7,16 +7,11 @@ import {
 } from "@/app/auth/utils/customInputsValues";
 import { FormAuthInputs, Validation } from "@/app/auth/utils/interfaces";
 import { dataURLS } from "@/app/dashboard/utils/dataUrls";
-<<<<<<< HEAD
 import { handleMultiPartWebSiteFormData } from "@/app/utils/submitFormData";
 import { SubmitHandler, useForm } from "react-hook-form";
 import CustomFileInput from "../CustomFileInput/CustomFileInput";
 import CustomeInput from "../CustomInput/CustomeInput";
 import styles from "./addTeacherForm.module.css";
-=======
-import styles from "./addTeacherForm.module.css";
-import SelectMenu from "../SelectMenu/SelectMenu";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 interface TeacherInput {
   lableName: string;
@@ -32,10 +27,6 @@ export default function AddTeacherForm() {
     handleSubmit,
     reset,
     setError,
-<<<<<<< HEAD
-=======
-    setValue,
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
     formState: { errors },
   } = useForm<FormAuthInputs>();
   const name: TeacherInput = {
@@ -88,7 +79,6 @@ export default function AddTeacherForm() {
         >
           Gender
         </label>
-<<<<<<< HEAD
         <select
           {...register("gender", { required: "Gender is required" })}
           className={`${
@@ -101,24 +91,6 @@ export default function AddTeacherForm() {
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
-=======
-        <input
-          type="hidden"
-          {...register("gender", { required: "Gender is required" })}
-        />
-        <SelectMenu
-          value={watch("gender") || ""}
-          onChange={(value) =>
-            setValue("gender", value, { shouldValidate: true })
-          }
-          placeholder="Select gender"
-          invalid={Boolean(errors.gender)}
-          options={[
-            { value: "male", label: "Male" },
-            { value: "female", label: "Female" },
-          ]}
-        />
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         {errors.gender && (
           <p className="text-red-500 text-sm">{errors.gender.message}</p>
         )}
@@ -152,11 +124,7 @@ export default function AddTeacherForm() {
             id={`addTeacher${input.name}`}
             validation={input.validation}
           />
-<<<<<<< HEAD
         )
-=======
-        ),
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       )}
 
       <button

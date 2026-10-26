@@ -8,10 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MdDelete } from "react-icons/md";
-<<<<<<< HEAD
-=======
-import avatar from "../../imgs/teachers/teacher1.png";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 import Swal from "sweetalert2";
 import avatar from "../../imgs/teachers/teacher1.png";
 
@@ -29,10 +25,7 @@ export default function ParentTableRow({ cell, currStudentId }: TableRowProps) {
       confirmButtonColor: "#ff2020",
       confirmButtonText: "Yes, Remove",
     }).then(async (result) => {
-<<<<<<< HEAD
       const token = await getTokenFromServerCookies();
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
       if (result.isConfirmed) {
         const res = await axios.post(
           `${dataURLS.removeParentFromStudent}`,
@@ -41,15 +34,9 @@ export default function ParentTableRow({ cell, currStudentId }: TableRowProps) {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
-<<<<<<< HEAD
               Authorization: `Bearer ${token}`,
             },
           }
-=======
-              Authorization: `Bearer ${Cookies.get("SERVER_JLOOMS_TOKEN")}`,
-            },
-          },
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
         );
         if (res.status === 200) {
           Swal.fire({

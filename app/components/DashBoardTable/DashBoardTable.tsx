@@ -1,6 +1,5 @@
 import { Table } from "@/app/dashboard/utils/interfaces";
 import ClassesTableRow from "../ClassesTableRow/ClassesTableRow";
-<<<<<<< HEAD
 import CurriculumsTableRow from "../CurriculumsTableRow/CurriculumsTableRow";
 import EmployeesTableRow from "../EmployeesTableRow/EmployeesTableRow";
 import MainParentTableRow from "../MainParentTableRow/MainParentTableRow";
@@ -8,12 +7,6 @@ import ParentTableRow from "../ParentTableRow/ParentTableRow";
 import RolesTableRow from "../RolesTableRow/RolesTableRow";
 import StudentsTableRow from "../StudentsTableRow/StudentsTableRow";
 import TeachersTableRow from "../TeachersTableRow/TeachersTableRow";
-=======
-import StudentsTableRow from "../StudentsTableRow/StudentsTableRow";
-import TeachersTableRow from "../TeachersTableRow/TeachersTableRow";
-import ParentTableRow from "../ParentTableRow/ParentTableRow";
-import MainParentTableRow from "../MainParentTableRow/MainParentTableRow";
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
 
 interface DashBoardTableProps {
   tableData: Table[];
@@ -49,12 +42,9 @@ export default function DashBoardTable({
             {currPage === "singleStudent" && cell?.code && (
               <ParentTableRow currStudentId={currStudentId} cell={cell} />
             )}
-<<<<<<< HEAD
             {currPage === "employees" && <EmployeesTableRow cell={cell} />}
             {currPage === "Roles" && <RolesTableRow cell={cell} />}
             {currPage === "curriculums" && <CurriculumsTableRow cell={cell} />}
-=======
->>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
           </tbody>
         ))}
       </table>
