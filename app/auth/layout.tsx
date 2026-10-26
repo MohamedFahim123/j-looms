@@ -91,6 +91,7 @@ function ClassMark() {
         stroke="#4338ca"
         strokeWidth="3"
         strokeLinejoin="round"
+      
       />
       <path d="M24 34h20M24 42h14" stroke="#4338ca" strokeWidth="3" strokeLinecap="round" />
     </svg>
