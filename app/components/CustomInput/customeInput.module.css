@@ -1,0 +1,40 @@
+.authLable {
+  color: #3f425c;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+.formInput {
+  background-color: #ffffff;
+  margin: 0.35rem 0 0.15rem;
+  padding: 0.8rem 0.9rem;
+  font-size: 1rem;
+  border: 1px solid #e1e3ee;
+  border-radius: 12px;
+  width: 100%;
+}
+.formInput:focus,
+.formInput:focus-visible {
+  outline: none;
+  border-color: #4338ca;
+  box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.16);
+}
+.error {
+  font-size: 11px !important;
+}
+.formInput.errorInput {
+  border: 1px solid rgb(239 68 68) !important;
+}
+.errorInput {
+  border: 1px solid rgb(239 68 68) !important;
+}
+.inputContainer {
+  position: relative;
+}
+.passwordViewIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  color: #000000;
+}

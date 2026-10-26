@@ -1,0 +1,247 @@
+"use client";
+
+import { CustomPasswordInput } from "@/app/auth/utils/customInputsValues";
+import { FormAuthInputs, Validation } from "@/app/auth/utils/interfaces";
+import { dataURLS } from "@/app/dashboard/utils/dataUrls";
+<<<<<<< HEAD
+=======
+import styles from "./addStudentForm.module.css";
+>>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
+import { useClassesStore } from "@/app/store/getAllClasses";
+import { handleMultiPartWebSiteFormData } from "@/app/utils/submitFormData";
+import { useMemo } from "react";
+<<<<<<< HEAD
+import { SubmitHandler, useForm } from "react-hook-form";
+import CustomFileInput from "../CustomFileInput/CustomFileInput";
+import CustomeInput from "../CustomInput/CustomeInput";
+import styles from "./addStudentForm.module.css";
+=======
+import SelectMenu from "../SelectMenu/SelectMenu";
+>>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
+
+interface StudentInput {
+  lableName: string;
+  name: keyof FormAuthInputs;
+  placeholder: string;
+  type: string;
+  validation?: Validation;
+}
+
+export default function AddStudentForm() {
+  const {
+    register,
+    watch,
+    setError,
+    reset,
+<<<<<<< HEAD
+=======
+    setValue,
+>>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormAuthInputs>();
+  const watchValues = useMemo(() => watch(), [watch]);
+
+  const firstInputs: StudentInput[] = [
+    {
+      lableName: "Full Name",
+      name: "name",
+      placeholder: "Enter Full Name",
+      type: "text",
+      validation: {
+        required: "Name is Required",
+      },
+    },
+    {
+      lableName: "Student Code",
+      name: "code",
+      placeholder: "Student Code",
+      type: "text",
+      validation: {
+        required: "Code is Required",
+      },
+    },
+  ];
+
+  const { classes } = useClassesStore();
+
+  const Inputs: StudentInput[] = [
+    {
+      lableName: "Birth Date",
+      name: "birth_date",
+      placeholder: "Birth Date",
+      type: "date",
+      validation: {
+        required: "Birth Date is Required",
+      },
+    },
+    {
+      lableName: "Blood Type",
+      name: "blood_type",
+      placeholder: "Blood Type",
+      type: "text",
+      validation: {
+        required: "Blood Type is Required",
+      },
+    },
+    CustomPasswordInput,
+    {
+      lableName: "Profile Picture",
+      name: "image",
+      placeholder: "profile picture",
+      type: "file",
+      validation: {
+        required: "Profile Picture is Required",
+      },
+    },
+  ];
+
+  const onSubmit: SubmitHandler<FormAuthInputs> = (data) => {
+    handleMultiPartWebSiteFormData(data, dataURLS.addStudent, setError, reset);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-6 mt-5">
+      {firstInputs?.map((input, idx) => (
+        <CustomeInput
+          key={idx}
+          name={input.name}
+          placeHolder={input.placeholder}
+          register={register}
+          error={errors}
+          type={input.type}
+          lable={input.lableName}
+          id={`addstudent${input.name}`}
+          validation={input.validation}
+        />
+      ))}
+      <div>
+        <label
+          className={`${styles.authLable} block mb-2 text-sm font-medium dark:text-white`}
+        >
+          Gender
+        </label>
+<<<<<<< HEAD
+        <select
+          defaultValue={""}
+          {...register("gender", { required: "Gender is required" })}
+          className={`${
+            errors?.gender?.message && "border-red-500"
+          } w-full px-4 py-2 border rounded-md focus:outline-none`}
+        >
+          <option value="" disabled>
+            Select gender
+          </option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+=======
+        <input
+          type="hidden"
+          {...register("gender", { required: "Gender is required" })}
+        />
+        <SelectMenu
+          value={watch("gender") || ""}
+          onChange={(value) =>
+            setValue("gender", value, { shouldValidate: true })
+          }
+          placeholder="Select gender"
+          invalid={Boolean(errors.gender)}
+          options={[
+            { value: "male", label: "Male" },
+            { value: "female", label: "Female" },
+          ]}
+        />
+>>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
+        {errors.gender && (
+          <p className="text-red-500 text-sm">{errors.gender.message}</p>
+        )}
+      </div>
+      <div>
+        <label
+          className={`${styles.authLable} block mb-2 text-sm font-medium dark:text-white`}
+        >
+          Class
+        </label>
+<<<<<<< HEAD
+        <select
+          defaultValue={""}
+          {...register("grade_id", { required: "class is required" })}
+          className={`${
+            errors?.grade_id?.message && "border-red-500"
+          } w-full px-4 py-2 border rounded-md focus:outline-none`}
+        >
+          <option value="" disabled>
+            Select class
+          </option>
+          {classes?.map((cls) => (
+            <option key={cls.id} value={cls.id}>
+              {cls.name}
+            </option>
+          ))}
+        </select>
+=======
+        <input
+          type="hidden"
+          {...register("grade_id", { required: "class is required" })}
+        />
+        <SelectMenu
+          value={watch("grade_id") || ""}
+          onChange={(value) =>
+            setValue("grade_id", value, { shouldValidate: true })
+          }
+          placeholder="Select class"
+          invalid={Boolean(errors.grade_id)}
+          options={(classes ?? []).map((cls) => ({
+            value: String(cls.id),
+            label: cls.name,
+          }))}
+        />
+>>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
+        {errors.grade_id && (
+          <p className="text-red-500 text-sm">{errors.grade_id.message}</p>
+        )}
+      </div>
+      {Inputs?.map((input) =>
+        input?.type === "file" ? (
+          <CustomFileInput
+            key={input.name}
+            name={input.name}
+            placeHolder={input.placeholder}
+            register={register}
+            error={errors}
+            type={input.type}
+            lable={input.lableName}
+            id={`addstudent${input.name}`}
+            validation={input.validation}
+            fileUploaded={
+              (watchValues[input.name] as unknown as FileList)?.length > 0
+            }
+          />
+        ) : (
+          <CustomeInput
+            key={input.name}
+            name={input.name}
+            placeHolder={input.placeholder}
+            register={register}
+            error={errors}
+            type={input.type}
+            lable={input.lableName}
+            id={`addstudent${input.name}`}
+            validation={input.validation}
+          />
+<<<<<<< HEAD
+        )
+=======
+        ),
+>>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
+      )}
+      <button
+        type="submit"
+        className="bg-indigo-500 hover:bg-indigo-600 transition-all duration-300 text-white font-medium py-2 px-4 rounded"
+      >
+        Add Student
+      </button>
+    </form>
+  );
+}

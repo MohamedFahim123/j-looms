@@ -1,0 +1,74 @@
+import { baseUrl } from "@/app/utils/baseUrl";
+import Cookies from "js-cookie";
+import { DATAURLSINTERFACE } from "./interfaces";
+
+<<<<<<< HEAD
+export const token = Cookies.get("CLIENT_JLOOMS_TOKEN");
+=======
+export const token = Cookies.get("SERVER_JLOOMS_TOKEN");
+>>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
+
+export const dataURLS: DATAURLSINTERFACE = {
+  teachers: `${baseUrl}/school/all-teachers`,
+  singleTeacher: `${baseUrl}/school/show-teacher`,
+  updateTeacherStatus: `${baseUrl}/school/update-teacher-status`,
+  addTeacher: `${baseUrl}/school/store-teacher`,
+  filterTeachers: `${baseUrl}/school/filter-teachers`,
+  deleteTeacher: `${baseUrl}/school/delete-teacher`,
+  students: `${baseUrl}/school/all-students`,
+  classes: `${baseUrl}/school/all-classes`,
+  getActions: `${baseUrl}/school/actions`,
+  getActivities: `${baseUrl}/school/activities`,
+  addNewClass: `${baseUrl}/school/store-class`,
+  getAllClasses: `${baseUrl}/school/all-classes`,
+  filterClasses: `${baseUrl}/school/filter-classes`,
+  deleteClass: `${baseUrl}/school/delete-class`,
+  singleClass: `${baseUrl}/school/show-class`,
+  addStudent: `${baseUrl}/school/store-student`,
+  allStudents: `${baseUrl}/school/all-students`,
+  filterStudents: `${baseUrl}/school/filter-students`,
+  singleStudent: `${baseUrl}/school/show-student`,
+  deleteStudent: `${baseUrl}/school/delete-student`,
+  assignStudentToClass: `${baseUrl}/school/assign-student-to-class`,
+  assignParentToStudent: `${baseUrl}/school/assign-parent-to-student`,
+  removeParentFromStudent: `${baseUrl}/school/remove-parent-from-student`,
+  allParents: `${baseUrl}/school/parents`,
+  singleParent: `${baseUrl}/school/show-parent`,
+  addParent: `${baseUrl}/school/store-parent`,
+  deleteParent: `${baseUrl}/school/delete-parent`,
+  filterParentsByCode: `${baseUrl}/school/filter-parents`,
+  filterParents: `${baseUrl}/school/search-parents`,
+  allowedTeachers: `${baseUrl}/school/allowed-teachers`,
+<<<<<<< HEAD
+  addActionToClass: `${baseUrl}/school/add-class-action`,
+  addActivityToClass: `${baseUrl}/school/add-class-activity`,
+  editActionInsideClass: `${baseUrl}/school/update-class-action`,
+  editActivityInsideClass: `${baseUrl}/school/update-class-activity`,
+  removeActionFromClass: `${baseUrl}/school/delete-class-action`,
+  removeActivityFromClass: `${baseUrl}/school/delete-class-activity`,
+  assignTeacherToClass: `${baseUrl}/school/assign-teachers`,
+  removeTeacherFromClass: `${baseUrl}/school/delete-teacher`,
+  employees: `${baseUrl}/school/all-employees`,
+  filterEmployees: `${baseUrl}/school/filter-employees`,
+  addEmployee: `${baseUrl}/school/add-employee`,
+  singleEmployee: `${baseUrl}/school/show-employee`,
+  deleteEmployee: `${baseUrl}/school/delete-employee`,
+  updateEmployeeStatus: `${baseUrl}/school/update-employee-status`,
+  allRoles: `${baseUrl}/school/roles`,
+  addRole: `${baseUrl}/school/roles-create`,
+  deleteRole: `${baseUrl}/school/roles-delete`,
+  filterRoles: `${baseUrl}/school/roles-search`,
+  singleRole: `${baseUrl}/school/roles-show`,
+  allPermissions: `${baseUrl}/school/permissions`,
+  allCurriculums: `${baseUrl}/school/all-curriculums`,
+  singleCurriculum: `${baseUrl}/school/show-curriculum`,
+  addCurriculum: `${baseUrl}/school/add-curriculum`,
+  removeCurriculum: `${baseUrl}/school/delete-curriculum`,
+  curriculumsFilter: `${baseUrl}/school/filter-curriculums`,
+=======
+  addOptionToClass: `${baseUrl}/school/add-class-option`,
+  editOptionInsideClass: `${baseUrl}/school/update-class-option`,
+  removeOptionFromClass: `${baseUrl}/school/delete-class-option`,
+  assignTeacherToClassOption: `${baseUrl}/school/assign-teachers`,
+>>>>>>> 081db88 (update the project files and create a mock data and create business pages.)
+};
