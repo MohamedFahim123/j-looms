@@ -6,7 +6,7 @@ import { useRulesStore } from "@/app/store/getAllRules";
 import { useUserStore } from "@/app/store/getLoginnedUserProfile";
 import { useLoginnedUserStore } from "@/app/store/useCurrLoginnedUser";
 import { usePathname, useRouter } from "next/navigation";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   FaArrowAltCircleLeft,
   FaArrowAltCircleRight,
@@ -31,6 +31,7 @@ interface SideBarProps {
 export default function SideBar({ collapsed, setCollapsed }: SideBarProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   const { classes, getClasses, classesLoading } = useClassesStore();
   const { rules, getRules, rulesLoading } = useRulesStore();
   const { user, getUser, userLoading } = useUserStore();
@@ -50,10 +51,9 @@ export default function SideBar({ collapsed, setCollapsed }: SideBarProps) {
   }, [getAllActivities]);
 
   const getUserProfile = useCallback(() => {
-    if (!user && !userLoading) {
-      getUser();
-    }
-  }, [getUser, user, userLoading]);
+    if (userLoginnedType !== "Admin" || user || userLoading) return;
+    getUser();
+  }, [getUser, user, userLoading, userLoginnedType]);
 
   const getAllCountries = useCallback(() => {
     if (countries.length === 0 && !countriesLoading) {
@@ -83,6 +83,10 @@ export default function SideBar({ collapsed, setCollapsed }: SideBarProps) {
   const isActive = (path: string) => pathname.includes(path);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 768) {
         setCollapsed(true);
@@ -97,6 +101,10 @@ export default function SideBar({ collapsed, setCollapsed }: SideBarProps) {
 
     return () => window.removeEventListener("resize", handleResize);
   }, [setCollapsed]);
+
+  if (!mounted) {
+    return <div className={`min-h-screen ${styles.sideBarContainer}`} />;
+  }
 
   return (
     <Sidebar

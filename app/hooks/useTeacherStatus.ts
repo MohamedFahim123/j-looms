@@ -1,5 +1,6 @@
 "use client";
 
+import { getTokenFromServerCookies } from "@/app/auth/utils/storeTokenOnServer";
 import { dataURLS } from "@/app/dashboard/utils/dataUrls";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
@@ -22,7 +23,8 @@ export function useTeacherStatus(
     const previous = value;
     setValue(next);
     if (!teacherId) return;
-    const token = Cookies.get("SERVER_JLOOMS_TOKEN");
+    const token =
+      Cookies.get("CLIENT_JLOOMS_TOKEN") || (await getTokenFromServerCookies());
     const toastId = toast.loading("Loading...");
     try {
       const request = await fetch(

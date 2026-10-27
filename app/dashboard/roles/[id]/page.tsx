@@ -3,6 +3,7 @@ import Loader from "@/app/components/Loader/Loader";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
+import { serverFetch } from "@/lib/mock/server-fetch";
 import { dataURLS } from "../../utils/dataUrls";
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ const SingleRolePage = async ({ params }: RoleDetailsProps) => {
   const cookiesData = await cookies();
   const token = cookiesData.get("CLIENT_JLOOMS_TOKEN")?.value;
 
-  const fetchRole = await fetch(`${dataURLS.singleRole}/${id}`, {
+  const fetchRole = await serverFetch(`${dataURLS.singleRole}/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -31,10 +31,20 @@ export default function Layout({ children }: LayoutInterface) {
   }, [setUserLoginned, userLoginned]);
 
   useEffect(() => {
-    const userType =
+    const stored =
       typeof window !== "undefined" ? localStorage.getItem("userType") : null;
-    if (userType) {
-      setUserLoginnedType(userType);
+    if (stored === "Admin" || stored === "Employee") {
+      setUserLoginnedType(stored);
+      return;
+    }
+    const raw = Cookies.get("CurrUserLoginned");
+    if (!raw) return;
+    try {
+      const person = JSON.parse(raw) as { id?: string; role?: string };
+      if (person.role) setUserLoginnedType("Employee");
+      else if (person.id) setUserLoginnedType("Admin");
+    } catch {
+      return;
     }
   }, [setUserLoginnedType]);
 

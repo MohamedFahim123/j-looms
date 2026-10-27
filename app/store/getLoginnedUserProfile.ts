@@ -53,7 +53,7 @@ export const useUserStore = create<UseUserStoreIterface>((set) => ({
       set({ userLoading: true });
       try {
         const res = await axios.get(
-          `${baseUrl}/school/my-profile?t=${currentTime}`,
+          `${baseUrl}/school/profile?t=${currentTime}`,
           {
             headers: {
               "Content-Type": "application/json",

@@ -11,6 +11,22 @@ import { useForm } from "react-hook-form";
 import Loader from "../Loader/Loader";
 import Image from "next/image";
 
+const FALLBACK_PROFILE_IMAGE = "/JLsiteicon.png";
+
+function schoolImageSrc(src: string | null | undefined) {
+  if (
+    src &&
+    src !== "N/A" &&
+    (src.startsWith("/") ||
+      src.startsWith("blob:") ||
+      src.startsWith("http://") ||
+      src.startsWith("https://"))
+  ) {
+    return src;
+  }
+  return FALLBACK_PROFILE_IMAGE;
+}
+
 export default function ProfileForm() {
   const [isEditing, setIsEditing] = useState(false);
   const { user } = useUserStore();
@@ -20,7 +36,7 @@ export default function ProfileForm() {
   let imageInputRef = useState<HTMLInputElement | null>(null)[0];
 
   useEffect(() => {
-    if (user?.image) {
+    if (user?.image && user.image !== "N/A") {
       setPreviewImage(user.image);
     }
   }, [user]);
@@ -167,8 +183,8 @@ export default function ProfileForm() {
           {isEditing && (
             <div className="w-full flex gap-6 flex-wrap mb-10 space-y-2 relative">
               <Image
-                src={previewImage || "/profile.png"}
-                alt={user?.name}
+                src={schoolImageSrc(previewImage)}
+                alt={user?.name || "School profile"}
                 width={200}
                 height={200}
                 className="rounded-full border border-gray-300 object-cover"

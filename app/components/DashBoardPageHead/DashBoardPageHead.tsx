@@ -2,8 +2,18 @@
 
 import { getTokenFromServerCookies } from "@/app/auth/utils/storeTokenOnServer";
 import { dataURLS } from "@/app/dashboard/utils/dataUrls";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { FaArrowLeft } from "react-icons/fa";
 import { toast } from "react-toastify";
 import MainDashBoardBtn from "../MainDashBoardBtn/MainDashBoardBtn";
+
+function backTarget(pathname: string): string | null {
+  const parts = pathname.split("/").filter(Boolean);
+  if (parts[0] !== "dashboard" || parts.length < 3) return null;
+  if (parts[1] === "settings") return null;
+  return `/${parts.slice(0, -1).join("/")}`;
+}
 
 interface Option {
   label: string;
@@ -39,6 +49,7 @@ export default function DashBoardPageHead({
   haveFilter,
   filterOptions,
 }: DashBoardPageHeadProps) {
+  const backHref = backTarget(usePathname() || "");
   const handleUpdateStatus = async (e: {
     target: HTMLSelectElement;
   }): Promise<void> => {
@@ -112,7 +123,17 @@ export default function DashBoardPageHead({
 
   return (
     <>
-      <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+      <div className="px-6 py-4 border-b border-gray-200">
+        {backHref ? (
+          <Link
+            href={backHref}
+            className="mb-2 inline-flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-800"
+          >
+            <FaArrowLeft size={12} aria-hidden />
+            Back
+          </Link>
+        ) : null}
+        <div className="flex justify-between items-center gap-3">
         {text && (
           <h2 className="text-2xl font-semibold leading-tight">
             {text || "Loading..."}
@@ -148,6 +169,7 @@ export default function DashBoardPageHead({
             ))}
           </select>
         )}
+        </div>
       </div>
     </>
   );

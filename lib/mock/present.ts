@@ -137,6 +137,8 @@ export function optionView(db: MockDb, option: MockClassOption) {
     action: option.type === "action" ? label : "",
     name: label,
     teachers,
+    class_action_id: option.type === "action" ? option.id : undefined,
+    class_activity_id: option.type === "activity" ? option.id : undefined,
   };
 }
 

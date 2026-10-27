@@ -1,11 +1,13 @@
 "use client";
 
+import { getTokenFromServerCookies } from "@/app/auth/utils/storeTokenOnServer";
 import { baseUrl } from "@/app/utils/baseUrl";
 import Cookies from "js-cookie";
 import type { ListFilters, ListResult } from "./useDashboardList";
 
-function headers(): HeadersInit {
-  const token = Cookies.get("SERVER_JLOOMS_TOKEN");
+async function headers(): Promise<HeadersInit> {
+  const token =
+    Cookies.get("CLIENT_JLOOMS_TOKEN") || (await getTokenFromServerCookies());
   return {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -22,7 +24,7 @@ async function readJson(response: Response): Promise<Record<string, unknown>> {
 
 export async function getSchool<T>(path: string): Promise<T> {
   const response = await fetch(`${baseUrl}${path}`, {
-    headers: headers(),
+    headers: await headers(),
     cache: "no-store",
   });
   const json = await readJson(response);
@@ -39,7 +41,7 @@ export async function getSchool<T>(path: string): Promise<T> {
 export async function postSchool(path: string, body: Record<string, unknown>) {
   const response = await fetch(`${baseUrl}${path}`, {
     method: "POST",
-    headers: headers(),
+    headers: await headers(),
     body: JSON.stringify(body),
   });
   const json = await readJson(response);
@@ -54,7 +56,7 @@ export async function postSchool(path: string, body: Record<string, unknown>) {
 export async function deleteSchool(path: string) {
   const response = await fetch(`${baseUrl}${path}`, {
     method: "DELETE",
-    headers: headers(),
+    headers: await headers(),
   });
   const json = await readJson(response);
   if (!response.ok) {

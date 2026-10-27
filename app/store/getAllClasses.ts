@@ -29,6 +29,7 @@ export const useClassesStore = create<UseClassesStoreIterface>((set) => ({
     if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
       return;
     }
+    lastFetchedTime = currentTime;
 
     set({ classesLoading: true });
 

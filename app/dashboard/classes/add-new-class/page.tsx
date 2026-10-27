@@ -2,6 +2,7 @@ import AddNewClassForm from "@/app/components/AddNewClassForm/AddNewClassForm";
 import DashBoardPageHead from "@/app/components/DashBoardPageHead/DashBoardPageHead";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
+import { serverFetch } from "@/lib/mock/server-fetch";
 import { dataURLS } from "../../utils/dataUrls";
 import Loader from "@/app/components/Loader/Loader";
 import { Suspense } from "react";
@@ -25,7 +26,7 @@ async function fetchWithCache(
   ) {
     return cache[cacheKey].data;
   }
-  const response = await fetch(url, {
+  const response = await serverFetch(url, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

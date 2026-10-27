@@ -29,6 +29,7 @@ export const useRulesStore = create<UseRulesStoreIterface>((set) => ({
     if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
       return;
     }
+    lastFetchedTime = currentTime;
 
     set({ rulesLoading: true });
 

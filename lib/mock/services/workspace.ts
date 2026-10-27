@@ -1,6 +1,6 @@
 import { fail, includesText, ok, sameText, text } from "../http";
 import { paginate } from "../present";
-import type { MockDb, MockResult, MockSchool } from "../types";
+import { MOCK_IMAGE, type MockDb, type MockResult, type MockSchool } from "../types";
 import { schoolIdFrom } from "./school";
 
 const TIMEZONES = [
@@ -28,11 +28,15 @@ function schoolOf(
 function profileView(school: MockSchool) {
   return {
     id: school.id,
+    name: school.name,
     admin_name: school.adminName,
     school_name: school.name,
     email: school.email,
     phone: school.phone,
     address: school.address,
+    address_en: school.address,
+    address_ar: school.address,
+    image: MOCK_IMAGE,
     verified: school.verified,
     timezone: school.timezone,
     language: school.language,
@@ -46,7 +50,8 @@ export function showProfile(
 ): MockResult {
   const school = schoolOf(db, authorization);
   if (!("email" in school)) return school;
-  return ok("Profile loaded", { data: { profile: profileView(school) } });
+  const profile = profileView(school);
+  return ok("Profile loaded", { data: { profile, school: profile } });
 }
 
 export function updateProfile(

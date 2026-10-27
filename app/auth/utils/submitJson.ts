@@ -47,20 +47,23 @@ export const handleApplication_JsonData = async (
       Cookies.set("CLIENT_JLOOMS_TOKEN", token, { expires: 1 });
     }
 
-    const { setUserLoginned } = useLoginnedUserStore.getState();
+    const { setUserLoginned, setUserLoginnedType } =
+      useLoginnedUserStore.getState();
     if (school?.id) {
       Cookies.set(`CurrUserLoginned`, JSON.stringify(school), {
         expires: 1,
         secure: true,
       });
       setUserLoginned(school);
+      setUserLoginnedType("Admin");
       handleRegistrationCookies(type, school.id);
-    }else if (employee?.id) {
+    } else if (employee?.id) {
       Cookies.set(`CurrUserLoginned`, JSON.stringify(employee), {
         expires: 1,
         secure: true,
       });
       setUserLoginned(employee);
+      setUserLoginnedType("Employee");
     }
 
     return "success";

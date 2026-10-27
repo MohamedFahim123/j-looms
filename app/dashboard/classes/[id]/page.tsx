@@ -2,6 +2,7 @@ import ActionOrActivitySection from "@/app/components/ActionOrActivitySection/Ac
 import DashBoardPageHead from "@/app/components/DashBoardPageHead/DashBoardPageHead";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
+import { serverFetch } from "@/lib/mock/server-fetch";
 import { dataURLS } from "../../utils/dataUrls";
 import { teacherInterface } from "../../utils/interfaces";
 import Loader from "@/app/components/Loader/Loader";
@@ -61,7 +62,7 @@ async function fetchWithCache(
   ) {
     return cache[cacheKey].data;
   }
-  const response = await fetch(url, {
+  const response = await serverFetch(url, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -82,7 +83,7 @@ export default async function ClassDetailsPage({ params }: classDetailsProps) {
   const { id } = await params;
   const cookiesData = await cookies();
   const token = cookiesData.get("CLIENT_JLOOMS_TOKEN")?.value;
-  const request = await fetch(
+  const request = await serverFetch(
     `${dataURLS.singleClass}/${id}?t=${new Date().getTime()}`,
     {
       method: "GET",
@@ -100,7 +101,7 @@ export default async function ClassDetailsPage({ params }: classDetailsProps) {
   const activityArray: OPTION[] = classDetails?.activities;
   const teachers: teacherInterface[] = classDetails?.teachers || [];
 
-  const allowedTeachersRequest = await fetch(
+  const allowedTeachersRequest = await serverFetch(
     `${dataURLS.allowedTeachers}?t=${new Date().getTime()}`,
     {
       method: "GET",

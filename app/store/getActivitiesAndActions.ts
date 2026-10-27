@@ -41,6 +41,7 @@ export const useActionsAndActivityStore =
       if (currentTime - lastFetchedTimeAction < CACHE_EXPIRATION_TIME) {
         return;
       }
+      lastFetchedTimeAction = currentTime;
       set({ dataLoading: true });
 
       try {
@@ -82,6 +83,7 @@ export const useActionsAndActivityStore =
       if (currentTime - lastFetchedTimeActivity < CACHE_EXPIRATION_TIME) {
         return;
       }
+      lastFetchedTimeActivity = currentTime;
       set({ dataLoading: true });
 
       try {

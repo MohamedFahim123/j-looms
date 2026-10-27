@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaEnvelope, FaGraduationCap, FaPhoneAlt } from "react-icons/fa";
 import Avatar from "../../../imgs/teachers/teacher1.png";
+import { serverFetch } from "@/lib/mock/server-fetch";
 import { dataURLS } from "../../utils/dataUrls";
-import Loader from "@/app/components/Loader/Loader";
 
 interface ParamsProps {
   id: string;
@@ -27,7 +27,7 @@ export default async function EmployeeDetailsPage({
   const cookiesData = await cookies();
   const token = cookiesData.get("CLIENT_JLOOMS_TOKEN")?.value;
 
-  const fetchEmployee = await fetch(`${dataURLS.singleEmployee}/${id}`, {
+  const fetchEmployee = await serverFetch(`${dataURLS.singleEmployee}/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -53,8 +53,12 @@ export default async function EmployeeDetailsPage({
     },
   ];
 
-  if (employee === undefined) {
-    return <Loader />;
+  if (!employee?.name) {
+    return (
+      <div className="w-full max-w-6xl bg-white shadow-md rounded-lg overflow-hidden">
+        <DashBoardPageHead text="Employee Not Found" haveBtn={false} />
+      </div>
+    );
   }
 
   return (

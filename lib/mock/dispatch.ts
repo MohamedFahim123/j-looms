@@ -1,6 +1,23 @@
 import { normalizeApiPath } from "./url";
 import { readDb, updateDb } from "./store";
 import { fail } from "./http";
+import {
+  curriculumCategories,
+  curriculumMilestones,
+  curriculumSubCategories,
+  curriculumTypes,
+  listCurriculums,
+  listEmployees,
+  listPermissions,
+  listRoles,
+  showCountry,
+  showCurriculum,
+  showEmployee,
+  showRole,
+  storeCurriculum,
+  storeEmployee,
+  storeRole,
+} from "./services/desk";
 import type { MockRequest, MockResult } from "./types";
 import {
   forgetPassword,
@@ -91,6 +108,90 @@ export async function dispatch(request: MockRequest): Promise<MockResult> {
   if (method === "POST" && pathname === "/school/pervious-step")
     return previousStep();
 
+  if (method === "GET" && pathname === "/all-countries") {
+    return {
+      status: 200,
+      body: {
+        data: {
+          countries: [
+            { id: 1, name: "Egypt" },
+            { id: 2, name: "Saudi Arabia" },
+            { id: 3, name: "United Arab Emirates" },
+          ],
+        },
+      },
+    };
+  }
+  if (
+    method === "GET" &&
+    (pathname === "/school/roles" || pathname === "/school/roles-search")
+  ) {
+    return listRoles();
+  }
+  if (method === "GET" && pathname === "/school/permissions") {
+    return listPermissions();
+  }
+  if (
+    method === "GET" &&
+    (pathname === "/school/all-employees" ||
+      pathname === "/school/filter-employees")
+  ) {
+    return listEmployees(searchParams);
+  }
+  if (method === "GET" && pathname === "/school/all-curriculums") {
+    return listCurriculums(searchParams, body);
+  }
+  if (method === "POST" && pathname === "/school/filter-curriculums") {
+    return listCurriculums(searchParams, body);
+  }
+  if (method === "GET" && pathname === "/school/curriculum-types") {
+    return curriculumTypes();
+  }
+  if (method === "POST" && pathname === "/school/add-employee") {
+    return storeEmployee(body);
+  }
+  if (method === "POST" && pathname === "/school/roles-create") {
+    return storeRole(body);
+  }
+  if (method === "POST" && pathname === "/school/add-curriculum") {
+    return storeCurriculum(body);
+  }
+  if (method === "POST" && pathname === "/school/add-class-action") {
+    return updateDb((db) =>
+      addClassOption(db, authorization, {
+        class_id: body.class_id,
+        option_id: body.action_id,
+        type: "action",
+      }),
+    );
+  }
+  if (method === "POST" && pathname === "/school/add-class-activity") {
+    return updateDb((db) =>
+      addClassOption(db, authorization, {
+        class_id: body.class_id,
+        option_id: body.activity_id,
+        type: "activity",
+      }),
+    );
+  }
+  if (method === "POST" && pathname === "/school/update-class-action") {
+    return updateDb((db) =>
+      updateClassOption(db, authorization, {
+        class_option_id: body.class_action_id,
+        option_id: body.action_id,
+        type: "action",
+      }),
+    );
+  }
+  if (method === "POST" && pathname === "/school/update-class-activity") {
+    return updateDb((db) =>
+      updateClassOption(db, authorization, {
+        class_option_id: body.class_activity_id,
+        option_id: body.activity_id,
+        type: "activity",
+      }),
+    );
+  }
   if (method === "GET" && pathname === "/school/actions")
     return catalogActions();
   if (method === "GET" && pathname === "/school/activities")
@@ -219,7 +320,9 @@ export async function dispatch(request: MockRequest): Promise<MockResult> {
   }
 
   const optionId = idFrom(
-    pathname.match(/^\/school\/delete-class-option\/(\d+)$/),
+    pathname.match(
+      /^\/school\/delete-class-(?:option|action|activity)\/(\d+)$/,
+    ),
   );
   if (optionId !== null && method === "DELETE") {
     return updateDb((db) => deleteClassOption(db, authorization, optionId));
@@ -281,6 +384,38 @@ export async function dispatch(request: MockRequest): Promise<MockResult> {
   const requestId = idFrom(pathname.match(/^\/school\/update-request\/(\d+)$/));
   if (requestId !== null && method === "POST")
     return updateDb((db) => updateRequest(db, authorization, requestId, body));
+
+  const roleId = idFrom(pathname.match(/^\/school\/roles-show\/(\d+)$/));
+  if (roleId !== null && method === "GET") return showRole(roleId);
+
+  const employeeId = idFrom(pathname.match(/^\/school\/show-employee\/(\d+)$/));
+  if (employeeId !== null && method === "GET") return showEmployee(employeeId);
+
+  const curriculumId = idFrom(
+    pathname.match(/^\/school\/show-curriculum\/(\d+)$/),
+  );
+  if (curriculumId !== null && method === "GET")
+    return showCurriculum(curriculumId);
+
+  const countryId = idFrom(pathname.match(/^\/show-country\/(\d+)$/));
+  if (countryId !== null && method === "GET") return showCountry(countryId);
+
+  const typeId = idFrom(
+    pathname.match(/^\/school\/curriculum-categories\/(\d+)$/),
+  );
+  if (typeId !== null && method === "GET") return curriculumCategories(typeId);
+
+  const categoryId = idFrom(
+    pathname.match(/^\/school\/curriculum-sub-categories\/(\d+)$/),
+  );
+  if (categoryId !== null && method === "GET")
+    return curriculumSubCategories(categoryId);
+
+  const milestoneId = idFrom(
+    pathname.match(/^\/school\/curriculum-milestones\/(\d+)$/),
+  );
+  if (milestoneId !== null && method === "GET")
+    return curriculumMilestones(milestoneId);
 
   return fail(404, "Endpoint not defined");
 }

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaEnvelope, FaGraduationCap, FaPhoneAlt } from "react-icons/fa";
 import Avatar from "../../../imgs/teachers/teacher1.png";
+import { serverFetch } from "@/lib/mock/server-fetch";
 import { dataURLS } from "../../utils/dataUrls";
 import { Suspense } from "react";
 import Loader from "@/app/components/Loader/Loader";
@@ -26,7 +27,7 @@ export default async function SingleParentPage({
   const cookiesData = await cookies();
   const token = cookiesData.get("CLIENT_JLOOMS_TOKEN")?.value;
 
-  const fetchparent = await fetch(`${dataURLS.singleParent}/${id}`, {
+  const fetchparent = await serverFetch(`${dataURLS.singleParent}/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

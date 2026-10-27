@@ -6,6 +6,7 @@ import { useLoginnedUserStore } from "@/app/store/useCurrLoginnedUser";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
+import { serverFetch } from "@/lib/mock/server-fetch";
 import { dataURLS } from "../../utils/dataUrls";
 
 interface ParamsProps {
@@ -28,7 +29,7 @@ export default async function SingleStudentPage({
   const token = cookiesData.get("CLIENT_JLOOMS_TOKEN")?.value;
   const { userLoginned, userLoginnedType } = useLoginnedUserStore.getState();
 
-  const fetchTeacher = await fetch(`${dataURLS.singleStudent}/${id}`, {
+  const fetchTeacher = await serverFetch(`${dataURLS.singleStudent}/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

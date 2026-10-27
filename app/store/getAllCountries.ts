@@ -27,6 +27,7 @@ export const useCountriesStore = create<UseCountriesStoreIterface>((set) => ({
     if (currentTime - lastFetchedTime < CACHE_EXPIRATION_TIME) {
       return;
     }
+    lastFetchedTime = currentTime;
 
     set({ countriesLoading: true });
 

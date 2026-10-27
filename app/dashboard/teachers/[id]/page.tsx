@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { FaEnvelope, FaGraduationCap, FaPhoneAlt } from "react-icons/fa";
 import Avatar from "../../../imgs/teachers/teacher1.png";
+import { serverFetch } from "@/lib/mock/server-fetch";
 import { dataURLS } from "../../utils/dataUrls";
 
 interface ParamsProps {
@@ -28,7 +29,7 @@ export default async function TeacherDetailsPage({
   const cookiesData = await cookies();
   const token = cookiesData.get("CLIENT_JLOOMS_TOKEN")?.value;
 
-  const fetchTeacher = await fetch(`${dataURLS.singleTeacher}/${id}`, {
+  const fetchTeacher = await serverFetch(`${dataURLS.singleTeacher}/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

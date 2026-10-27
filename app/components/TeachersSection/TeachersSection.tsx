@@ -41,6 +41,7 @@ async function fetchTeachersData(
   });
 
   if (!response.ok) {
+    loading = false;
     return { data: [], totalPages: 0 };
   }
 

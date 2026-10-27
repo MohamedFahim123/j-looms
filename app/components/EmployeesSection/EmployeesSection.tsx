@@ -40,6 +40,7 @@ async function fetchEmployeesData(
   });
 
   if (!response.ok) {
+    loading = false;
     return { data: [], totalPages: 0 };
   }
 
