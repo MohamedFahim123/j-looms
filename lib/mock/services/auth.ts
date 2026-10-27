@@ -4,8 +4,8 @@ import type { MockDb, MockResult } from "../types";
 import { DEMO_OTP } from "../types";
 import { SCHOOL_PROFILE } from "../workspace-data";
 
-function token() {
-  return `mock_${randomBytes(16).toString("hex")}`;
+function token(schoolId: number) {
+  return `mock.${schoolId}.${randomBytes(16).toString("hex")}`;
 }
 
 export function login(db: MockDb, body: Record<string, unknown>): MockResult {
@@ -27,7 +27,7 @@ export function login(db: MockDb, body: Record<string, unknown>): MockResult {
       email: ["Please complete registration."],
     });
   }
-  const sessionToken = token();
+  const sessionToken = token(school.id);
   db.sessions.push({ token: sessionToken, schoolId: school.id });
   return ok("Login Successfully!", {
     data: {

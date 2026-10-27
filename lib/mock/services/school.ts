@@ -28,10 +28,11 @@ export function schoolIdFrom(
     return fail(401, "Unauthenticated.");
   }
   const session = db.sessions.find((item) => item.token === token);
-  if (!session) {
-    return fail(401, "Unauthenticated.");
-  }
-  return session.schoolId;
+  if (session) return session.schoolId;
+  const embedded = /^mock\.(\d+)\.[0-9a-f]+$/i.exec(token);
+  const schoolId = embedded ? Number(embedded[1]) : NaN;
+  if (db.schools.some((school) => school.id === schoolId)) return schoolId;
+  return fail(401, "Unauthenticated.");
 }
 
 function isFailure(value: number | MockResult): value is MockResult {

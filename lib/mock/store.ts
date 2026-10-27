@@ -1,34 +1,49 @@
 import fs from "fs";
+import os from "os";
 import path from "path";
 import { createSeed } from "./seed";
 import { MOCK_DB_VERSION, type MockDb } from "./types";
 import { ensureWorkspace } from "./workspace-data";
 
-const filePath = path.join(process.cwd(), "data", "mock-db.json");
+const filePaths = [
+  path.join(process.cwd(), "data", "mock-db.json"),
+  path.join(os.tmpdir(), "join-looms-mock-db.json"),
+];
 
+let memory: MockDb | null = null;
 let queue: Promise<unknown> = Promise.resolve();
 
-function writeSync(db: MockDb) {
-  fs.mkdirSync(path.dirname(filePath), { recursive: true });
-  fs.writeFileSync(filePath, JSON.stringify(db));
+function persist(db: MockDb) {
+  memory = db;
+  for (const filePath of filePaths) {
+    try {
+      fs.mkdirSync(path.dirname(filePath), { recursive: true });
+      fs.writeFileSync(filePath, JSON.stringify(db));
+      return;
+    } catch {
+      // The project directory is read-only on Vercel. Try the next location.
+    }
+  }
+}
+
+function loadFile(filePath: string): MockDb | null {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(filePath, "utf8")) as MockDb;
+    if (parsed?.version !== MOCK_DB_VERSION || !Array.isArray(parsed.schools)) {
+      return null;
+    }
+    return parsed;
+  } catch {
+    return null;
+  }
 }
 
 function read(): MockDb {
-  try {
-    const raw = fs.readFileSync(filePath, "utf8");
-    const parsed = JSON.parse(raw) as MockDb;
-    if (parsed?.version !== MOCK_DB_VERSION || !Array.isArray(parsed.schools)) {
-      const seed = createSeed();
-      writeSync(seed);
-      return seed;
-    }
-    if (ensureWorkspace(parsed)) writeSync(parsed);
-    return parsed;
-  } catch {
-    const seed = createSeed();
-    writeSync(seed);
-    return seed;
+  if (!memory) {
+    memory = filePaths.map(loadFile).find((db) => db != null) ?? createSeed();
   }
+  if (ensureWorkspace(memory)) persist(memory);
+  return memory;
 }
 
 function enqueue<T>(work: () => T): Promise<T> {
@@ -50,10 +65,11 @@ export function updateDb<T>(mutator: (db: MockDb) => T): Promise<T> {
     const snapshot = JSON.stringify(db);
     try {
       const result = mutator(db);
-      writeSync(db);
+      persist(db);
       return result;
     } catch (error) {
-      writeSync(JSON.parse(snapshot) as MockDb);
+      memory = JSON.parse(snapshot) as MockDb;
+      persist(memory);
       throw error;
     }
   });

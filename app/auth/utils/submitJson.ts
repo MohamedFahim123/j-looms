@@ -16,13 +16,13 @@ export const handleApplication_JsonData = async (
   setError: UseFormSetError<FormAuthInputs>
 ) => {
   const loadingToastId: string | number = toast.loading("Loading...");
-  if (type === "login") {
-    await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
-      withCredentials: true,
-    });
-  }
 
   try {
+    if (type === "login") {
+      await axios.get(`${baseUrl}/sanctum/csrf-cookie`, {
+        withCredentials: true,
+      });
+    }
     const endPoint = authEndPoints[type];
     const XSRFTOKEN = Cookies.get("XSRF-TOKEN");
     const response = await axios.post(endPoint, data, {
